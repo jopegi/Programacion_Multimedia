@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--Listado de preferencias para el sexo-->
+    <ListPreference
+        android:key="sexo"
+        android:title="@string/pref_sexo"
+        android:entries="@array/pref_sexo"
+        android:entryValues="@array/pref_sexo_values"
+        android:summary="@string/pref_sexo_resumen" />
+
+    <!--Caja de texto para la preferencia nombre-->
+    <EditTextPreference
+        android:key="nombre"
+        android:title="@string/pref_nombre"
+        android:summary="@string/pref_nombre_resumen"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"/>
+
+    <!--Caja de texto para la preferencia dni-->
+    <EditTextPreference
+        android:key="dni"
+        android:title="@string/pref_dni"
+        android:summary="@string/pref_dni_resumen"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"/>
+
+    <!--Caja de texto para la preferencia fecha de nacimiento-->
+    <EditTextPreference
+        android:key="fecha_nac"
+        android:title="@string/pref_fecha_nac"
+        android:summary="@string/pref_fecha_nac_resumen"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"/>
+
+
+</PreferenceScreen>

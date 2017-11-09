@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ProyectoSplashImage</string>
+    <string name="activity_splash">Splash Screen</string>
+</resources>

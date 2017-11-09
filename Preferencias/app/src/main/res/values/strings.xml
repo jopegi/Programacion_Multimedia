@@ -1,0 +1,27 @@
+<resources>
+
+    <string name="pref_sexo">Sexo</string>
+    <string name="app_name">Preferencias</string>
+    <string name="pref_nombre">Nombre</string>
+    <string name="pref_dni">DNI</string>
+    <string name="pref_fecha_nac">Fecha nacimiento</string>
+    <string name="pref_sexo_resumen">Se almacena el sexo</string>
+    <string name="pref_nombre_resumen">Se almacena el nombre preferido</string>
+    <string name="pref_dni_resumen">Se almacena el DNI preferido</string>
+    <string name="pref_fecha_nac_resumen">Se almacena la fecha de nacimiento preferida</string>
+
+    <!--******Arrays de Strings para almacenar los pares clave-valor******-->
+    <string-array name="pref_sexo">
+        <item>hombre</item>
+        <item>mujer</item>
+    </string-array>
+    <string-array name="pref_sexo_values">
+        <item>hombre</item>
+        <item>mujer</item>
+    </string-array>
+    <!--******Arrays de Strings para almacenar los pares clave-valor******-->
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

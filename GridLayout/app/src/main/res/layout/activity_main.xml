@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Actividad: Un LinearLayout  horizontal con 2 scrolls
+Y dentro de cada scroll: 1 RelativeLayout en uno y un GridLayout en otro-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:padding="10dp">
+
+    <!--Scroll contenedor de álbumes-->
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginRight="10dp"
+        android:layout_weight="1"
+        android:background="#444">
+
+        <RelativeLayout
+            android:id="@+id/albums"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/album1"
+                android:layout_width="match_parent"
+                android:layout_height="125dp"
+                android:layout_margin="10dp"
+                android:background="#400"
+                android:gravity="center"
+                android:text="ALBUM 1"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/album2"
+                android:layout_width="match_parent"
+                android:layout_height="125dp"
+                android:layout_margin="10dp"
+                android:background="#400"
+                android:gravity="center"
+                android:text="ALBUM 2"
+                android:textColor="#fff"
+                android:layout_below="@+id/album1"/>
+
+            <TextView
+                android:id="@+id/album3"
+                android:layout_width="match_parent"
+                android:layout_height="125dp"
+                android:layout_margin="10dp"
+                android:background="#400"
+                android:gravity="center"
+                android:text="ALBUM 3"
+                android:textColor="#fff"
+                android:layout_below="@+id/album2"/>
+
+            <TextView
+                android:id="@+id/album4"
+                android:layout_width="match_parent"
+                android:layout_height="125dp"
+                android:layout_margin="10dp"
+                android:background="#400"
+                android:gravity="center"
+                android:text="ALBUM 4"
+                android:textColor="#fff"
+                android:layout_below="@+id/album3"/>
+
+            <TextView
+                android:id="@+id/album5"
+                android:layout_width="match_parent"
+                android:layout_height="125dp"
+                android:layout_margin="10dp"
+                android:background="#400"
+                android:gravity="center"
+                android:text="ALBUM 5"
+                android:textColor="#fff"
+                android:layout_below="@+id/album4"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <!--Scroll contenedor de fotos-->
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="#400"
+        android:padding="10dp">
+
+        <GridLayout
+            android:id="@+id/photos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:useDefaultMargins="true">
+
+            <TextView
+                android:id="@+id/photo1"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:background="#990"
+                android:gravity="center"
+                android:text="PHOTO 1"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/photo2"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:background="#990"
+                android:gravity="center"
+                android:text="PHOTO 2"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/photo3"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:background="#990"
+                android:gravity="center"
+                android:text="PHOTO 3"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/photo4"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:background="#990"
+                android:gravity="center"
+                android:text="PHOTO 4"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/photo5"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:background="#990"
+                android:gravity="center"
+                android:text="PHOTO 5"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/photo6"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:background="#990"
+                android:gravity="center"
+                android:text="PHOTO 6"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/photo7"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:background="#990"
+                android:gravity="center"
+                android:text="PHOTO 7"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/photo8"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:background="#990"
+                android:gravity="center"
+                android:text="PHOTO 8"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/photo9"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:background="#990"
+                android:gravity="center"
+                android:text="PHOTO 9"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/photo10"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:background="#990"
+                android:gravity="center"
+                android:text="PHOTO 10"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/photo11"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:background="#990"
+                android:gravity="center"
+                android:text="PHOTO 11"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/photo12"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:background="#990"
+                android:gravity="center"
+                android:text="PHOTO 12"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/photo13"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:background="#990"
+                android:gravity="center"
+                android:text="PHOTO 13"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/photo14"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:background="#990"
+                android:gravity="center"
+                android:text="PHOTO 14"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/photo15"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:background="#990"
+                android:gravity="center"
+                android:text="PHOTO 15"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/photo16"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:background="#990"
+                android:gravity="center"
+                android:text="PHOTO 16"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/photo17"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:background="#990"
+                android:gravity="center"
+                android:text="PHOTO 17"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/photo18"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:background="#990"
+                android:gravity="center"
+                android:text="PHOTO 18"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/photo19"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:background="#990"
+                android:gravity="center"
+                android:text="PHOTO 19"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/photo20"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:background="#990"
+                android:gravity="center"
+                android:text="PHOTO 20"
+                android:textColor="#fff" />
+
+        </GridLayout>
+
+    </ScrollView>
+
+</LinearLayout>

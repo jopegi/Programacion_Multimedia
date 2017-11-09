@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="josevi.android.com.actividad_24.MainActivity">
+
+
+        <ToggleButton
+            android:id="@+id/toggleButton1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="25dp"
+            android:text="FONDO ROJO"
+            android:textOff="FONDO ROJO"
+            android:textOn="FONDO BLANCO"
+            android:onClick="onToggle1Clicked"
+            />
+
+    <ToggleButton
+        android:id="@+id/toggleButton2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/toggleButton1"
+        android:layout_below="@+id/toggleButton1"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="15dp"
+        android:text="LETRAS NEGRAS"
+        android:textColor="@android:color/black"
+        android:textOff="LETRAS ROJAS"
+        android:textOn="LETRAS NEGRAS"
+        android:onClick="onToggle2Clicked"
+        />
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="46dp"
+        android:text="Mostrar"
+        android:layout_below="@+id/toggleButton2"
+        android:layout_alignStart="@+id/toggleButton2"
+        android:onClick="onCheckBoxChecked"/>
+
+    <TextView
+        android:id="@+id/textViewMensajeOculto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/checkBox"
+        android:layout_alignBottom="@+id/checkBox"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="25dp"
+        android:layout_toEndOf="@+id/checkBox" />
+
+    <TextView
+        android:id="@+id/textViewClickLargo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/checkBox"
+        android:layout_below="@+id/checkBox"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="50dp"
+        android:text="Haz aquí un click largo"
+        />
+
+    <LinearLayout
+        android:id="@+id/LayoutVertical"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/textViewClickLargo"
+        android:layout_marginTop="25dp">
+
+        <RatingBar
+            android:id="@+id/ratingBar2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="50dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="25dp"
+            android:numStars = "5"
+            android:stepSize="1.0"
+            android:scaleX="0.9"
+            android:scaleY="0.9"
+            android:onClick="mostrarEstrellas"/>
+
+        <TextView
+            android:id="@+id/textViewRatting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ratingBar2"
+            android:layout_marginEnd="150dp"
+            android:layout_marginStart="150dp"
+            android:layout_marginTop="25dp"
+            android:text="[0/5]" />
+
+    </LinearLayout>
+
+
+</RelativeLayout>
