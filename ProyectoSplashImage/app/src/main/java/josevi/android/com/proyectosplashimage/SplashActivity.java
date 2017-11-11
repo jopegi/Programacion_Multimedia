@@ -4,14 +4,18 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.Window;
 
+
 //Actividad que se ocupará de la gestión del Splash Screen
 public class SplashActivity extends Activity {
 
+
+    ProgressDialog  progress;
     // Constante que almacenará el tiempo de duración de la Splash Screen.
     //En este caso, 3 segundos
     private static final long SPLASH_SCREEN_DELAY = 3000;
@@ -19,6 +23,9 @@ public class SplashActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
 
         // Configuramos la pantalla en vertical
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
