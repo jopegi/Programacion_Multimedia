@@ -16,7 +16,7 @@ public class SettingsFragment extends PreferenceFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //Cargamos las preferencias definidas en el archivo settings.xml
-        addPreferencesFromResource(R.xml.settings);
+        addPreferencesFromResource(R.xml.opciones);
     }
 
 }
