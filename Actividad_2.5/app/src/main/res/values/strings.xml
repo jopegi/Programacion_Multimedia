@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Actividad_2.5</string>
+
+    <!--OPCIONES DE MENU CONTEXTUAL PARA UN ELLEMENTO DE UN LISTVIEW-->
+    <string name="action_mostrar_item">Mostrar</string>
+    <string name="action_eliminar_item">Eliminar</string>
+
+</resources>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="josevi.android.com.apppastillas.SecondActivity">
+
+    <TextView android:id="@+id/lblDia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Día:" />
+
+    <EditText
+        android:id="@+id/txtDia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="date" />
+
+    <TextView android:id="@+id/lblHora"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hora:" />
+
+    <EditText
+        android:id="@+id/txtHora"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="time" />
+
+</LinearLayout>
