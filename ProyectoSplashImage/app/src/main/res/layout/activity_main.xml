@@ -1,10 +1,19 @@
+<!--Utilizamos un Relative Layout-->
+<!--Definimos que el ancho del Layout sea el mismo que el de la aplicación: match_parent-->
+<!--Definimos que el alto del Layout sea el mismo que el de la aplicación: match_parent-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity" >
 
+    <!--Creamos una vista de tipo TextView-->
+    <!--Identificamos el compoenente con el identificador: CajaTexto1-->
+    <!--Definimos un ancho del componente que se adapte a su propio contenido: wrap_content-->
+    <!--Definimos un alto del componente que se adapte a su propio contenido: wrap_content-->
+    <!--Definimos el texto que mostrará la vista TextView-->
     <TextView
+        android:id="@+id/CajaTexto1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hola, acabas de ver un splash screen!" />

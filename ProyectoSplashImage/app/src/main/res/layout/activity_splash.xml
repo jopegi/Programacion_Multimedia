@@ -6,6 +6,13 @@
 
     <!--Dentro de un ImageView colocamos la imagen que servirá
     de Splash Screen-->
+    <!--Con la propiedad contentDescription definimos una breve
+    descripción de la imagen que contiene el ImageView-->
+    <!--Con el valor fitXY de la propiedad scaleType indicamos
+    que la imagen debe de escalarse horizontal y verticalmente
+    de forma independiente-->
+    <!--Con la propiedad src indicamos la ubicación de la
+    la imagen a mostrar por el ImageView-->
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
