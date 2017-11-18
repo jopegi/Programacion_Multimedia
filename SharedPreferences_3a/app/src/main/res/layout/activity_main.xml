@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="josevi.android.com.sharedpreferences_3a.MainActivity"
+    >
+
+    <TextView
+        android:id="@+id/Nom"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:gravity="bottom|center"
+        android:text="Nombre "
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/Fna"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/Nom"
+        android:gravity="bottom|center"
+        android:text="F.Nacimiento "
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/DNI"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/Fna"
+        android:gravity="bottom|center"
+        android:text="DNI "
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/txtNom"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="false"
+        android:layout_toRightOf="@+id/Nom"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/txtFna"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtNom"
+        android:layout_centerInParent="true"
+        android:layout_toRightOf="@+id/Nom"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/txtDni"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtFna"
+        android:layout_centerInParent="true"
+        android:layout_toRightOf="@+id/DNI"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_alignTop="@+id/Grb"
+        android:layout_toStartOf="@+id/Grb"
+        android:gravity="center"
+        android:text="Sexo"
+        android:textStyle="bold" />
+
+    <RadioGroup
+        android:id="@+id/Grb"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/txtDni"
+        android:layout_below="@+id/txtDni"
+        android:layout_marginTop="40dp"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/radioButton1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:text="Masculino" />
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Femenino" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="34dp"
+        android:text="Guardar" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/Grb"
+        android:layout_alignTop="@+id/save"
+        android:layout_marginEnd="18dp"
+        android:text="Ver Datos" />
+</RelativeLayout>
