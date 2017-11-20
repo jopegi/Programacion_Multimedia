@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     //Valor que se pasará como parámetro al método startActivityForResult encargado de
     //lanzar el intent definido en el Listener del botón showData
     final static int subActivity = 2;
-    //Objetos del XML.
+    //Referenciamos los objetos del layout
     Button save;
     Button showData;
     EditText txtNom;
@@ -31,28 +31,38 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //Inicializaciones.
-        save = (Button) findViewById(R.id.save);
-        showData = (Button) findViewById(R.id.button2);
+        save = (Button) findViewById(R.id.btnGuardar);
+        showData = (Button) findViewById(R.id.btnMostrar);
         txtNom = (EditText) findViewById(R.id.txtNom);
         fNa = (EditText) findViewById(R.id.txtFna);
         dni = (EditText) findViewById(R.id.txtDni);
         rMas = (RadioButton) findViewById(R.id.radioButton1);
         rFem = (RadioButton) findViewById(R.id.radioButton2);
 
-        //Listener del Button Guardar.
+        //Listener del botón Guardar.
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Hacemos una comprobacion de campos vacios.
+                //Validamos que todos los campos estén rellenos
                 if(txtNom.getText().toString().isEmpty() || fNa.getText().toString().isEmpty() || dni.getText().toString().isEmpty() ||(!rMas.isChecked() && !rFem.isChecked())){
+                    //Si algún campo de texto queda sin rellenar salta un Toast con un mensaje de aviso
                     Toast.makeText(getApplicationContext(),"Rellena Todos los Campos", Toast.LENGTH_SHORT).show();
                 }else {
-                    //Creamos SharedPreferences y almacenamos todos los campos de los EditText.
-                    SharedPreferences sp = getSharedPreferences("personalInformation", Activity.MODE_PRIVATE);
+                    //Creamos un objeto de tipo SharedPreferences engargado de almacenar todos los datos recogidos
+                    // por los campos de los EditText. Nuestro archivo xml SharedPrefernces se llamará "informacionPersonal"
+                    SharedPreferences sp = getSharedPreferences("informacionPersonal", Activity.MODE_PRIVATE);
+
+                    //Hacemos editable el objeto SharedPreferences
                     SharedPreferences.Editor editor = sp.edit();
 
-                    editor.putString("nom", txtNom.getText().toString());
-                    editor.putString("fNa", fNa.getText().toString());
+                    //Mediante el editor del SharedPreferences guardamos los valores que nos interesa
+                    //en forma de clave-valor.
+                    //CLAVE - VALOR
+                    //nombre - El que recogido por la caja de texto txtNom
+                    //fecha_nacimiento - El que recogido por la caja de texto fNa
+                    //dni - El que recogido por la caja de texto dni
+                    editor.putString("nombre", txtNom.getText().toString());
+                    editor.putString("fecha_nacimiento", fNa.getText().toString());
                     editor.putString("dni", dni.getText().toString());
 
                     if (rMas.isChecked()) {
@@ -68,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        //Listener del Button engardado de mostrar las preferencias guardadas en el objeto SharedPreferences.
+        //Listener del botón Mostrar engardado de mostrar las preferencias guardadas en el objeto SharedPreferences.
         showData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Intefaces_examen_act2</string>
+
+    <!--OPCIONES DE MENU CONTEXTUAL PARA UN ELLEMENTO DE UN LISTVIEW-->
+    <string name="action_anyadir_item">Añadir elemento a continuación</string>
+    <string name="action_eliminar_item">Eliminar elemento seleccionado</string>
+
+</resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/actionAnyadir"
+        android:title="@string/action_anyadir_item"
+        />
+    <item
+        android:id="@+id/actionEliminar"
+        android:title="@string/action_eliminar_item"
+        />
+</menu>

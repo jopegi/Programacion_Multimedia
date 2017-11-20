@@ -47,8 +47,8 @@ public class VerPreferenciasActivity extends AppCompatActivity {
         SharedPreferences sp = getSharedPreferences("personalInformation", MODE_PRIVATE);
 
         //Añadimos a los TextView el valor de las preferencias recogidas.
-        nom.setText(sp.getString("nom",""));
-        fNa.setText(sp.getString("fNa",""));
+        nom.setText(sp.getString("nombre",""));
+        fNa.setText(sp.getString("fecha_nacimiento",""));
         dni.setText(sp.getString("dni",""));
         sexo.setText(sp.getString("sexo",""));
     }

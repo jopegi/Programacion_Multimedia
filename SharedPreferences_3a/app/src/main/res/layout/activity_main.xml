@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="josevi.android.com.sharedpreferences_3a.MainActivity"
-    >
+    tools:context="josevi.android.com.sharedpreferences_3a.MainActivity">
 
     <TextView
         android:id="@+id/Nom"
@@ -78,7 +77,6 @@
 
     <RadioGroup
         android:id="@+id/Grb"
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/txtDni"
@@ -103,7 +101,7 @@
     </RadioGroup>
 
     <Button
-        android:id="@+id/save"
+        android:id="@+id/btnGuardar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -112,7 +110,7 @@
         android:text="Guardar" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnMostrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/Grb"
