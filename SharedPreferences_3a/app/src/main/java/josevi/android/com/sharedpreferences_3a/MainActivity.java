@@ -86,7 +86,8 @@ public class MainActivity extends AppCompatActivity {
                 //Con el Intent se pasa a la actividad VerPreferenciasActivity
                 Intent i = new Intent(MainActivity.this, VerPreferenciasActivity.class);
                 //Con el método startActivityForResult lanzamos una nueva actividad a la espera de que nos devuelva un resultado
-                startActivityForResult(i,subActivity);
+                //startActivityForResult(i,subActivity);
+                startActivity(i);
             }
         });
 

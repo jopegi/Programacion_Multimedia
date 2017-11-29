@@ -1,5 +1,6 @@
 package josevi.android.com.sharedpreferences_3a;
 
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -44,13 +45,13 @@ public class VerPreferenciasActivity extends AppCompatActivity {
     public void recuperaDatos(){
 
         //Creamos un Objeto con las preferencias establecidas.
-        SharedPreferences sp = getSharedPreferences("personalInformation", MODE_PRIVATE);
+        SharedPreferences sp = getSharedPreferences("personalInformation", Activity.MODE_PRIVATE);
 
         //Añadimos a los TextView el valor de las preferencias recogidas.
-        nom.setText(sp.getString("nombre",""));
-        fNa.setText(sp.getString("fecha_nacimiento",""));
-        dni.setText(sp.getString("dni",""));
-        sexo.setText(sp.getString("sexo",""));
+        nom.setText(sp.getString("nombre","error"));
+        fNa.setText(sp.getString("fecha_nacimiento","error"));
+        dni.setText(sp.getString("dni","error"));
+        sexo.setText(sp.getString("sexo","error"));
     }
 
 }
