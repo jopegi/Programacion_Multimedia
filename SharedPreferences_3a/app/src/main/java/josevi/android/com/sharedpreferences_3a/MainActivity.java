@@ -65,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
                     editor.putString("fecha_nacimiento", fNa.getText().toString());
                     editor.putString("dni", dni.getText().toString());
 
+                    //Toast.makeText(getApplicationContext(),"Nombre: "+txtNom.getText().toString(), Toast.LENGTH_SHORT).show();
+
                     if (rMas.isChecked()) {
                         editor.putString("sexo", "Masculino");
                     } else {

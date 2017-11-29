@@ -45,7 +45,7 @@ public class VerPreferenciasActivity extends AppCompatActivity {
     public void recuperaDatos(){
 
         //Creamos un Objeto con las preferencias establecidas.
-        SharedPreferences sp = getSharedPreferences("personalInformation", Activity.MODE_PRIVATE);
+        SharedPreferences sp = getSharedPreferences("informacionPersonal", Activity.MODE_PRIVATE);
 
         //Añadimos a los TextView el valor de las preferencias recogidas.
         nom.setText(sp.getString("nombre","error"));
