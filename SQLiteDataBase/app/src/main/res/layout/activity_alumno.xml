@@ -13,7 +13,7 @@
         android:id="@+id/btnInsertar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Insertar profesor"
+        android:text="Insertar alumno"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintBottom_creator="1"
         app:layout_constraintBottom_toTopOf="@+id/btnBorrarBBDD"
@@ -21,23 +21,23 @@
         android:layout_marginEnd="8dp"
         app:layout_constraintRight_toRightOf="parent"
         tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="65dp"
+        android:layout_marginBottom="80dp"
         app:layout_constraintLeft_toLeftOf="parent" />
 
     <Button
         android:id="@+id/btnBorrarId"
         android:layout_width="0dp"
         android:layout_height="52dp"
-        android:text="Eliminar profesor (por id)"
+        android:text="Eliminar alumno (por id)"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintBottom_creator="1"
         android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/btnVolver"
-        android:layout_marginTop="108dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="122dp"
+        app:layout_constraintTop_toBottomOf="@+id/editTextCurso"
         tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="106dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTextNota" />
+        android:layout_marginBottom="122dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <Button
         android:id="@+id/btnBorrarBBDD"
@@ -46,12 +46,12 @@
         android:background="@android:color/holo_red_dark"
         android:text="Borrar BBDD"
         android:textColor="@android:color/white"
-        tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/btnVolver"
         app:layout_constraintRight_toRightOf="@+id/btnInsertar"
-        android:layout_marginTop="3dp"
-        app:layout_constraintTop_toBottomOf="@+id/btnBorrarId"
         tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="8dp"
         app:layout_constraintLeft_toLeftOf="@+id/btnInsertar" />
 
     <TextView
@@ -59,9 +59,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nombre:"
-        android:layout_marginStart="16dp"
         tools:layout_constraintTop_creator="1"
-        android:layout_marginTop="28dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="7dp"
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -71,13 +71,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Edad:"
-        android:layout_marginStart="21dp"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextEdad"
+        android:layout_marginStart="21dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewCurso"
+        android:layout_marginTop="57dp"
         tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="55dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTextEdad" />
+        app:layout_constraintTop_toTopOf="@+id/textViewNombre" />
 
     <TextView
         android:id="@+id/textViewCiclo"
@@ -88,7 +90,7 @@
         tools:layout_constraintBottom_creator="1"
         app:layout_constraintBottom_toTopOf="@+id/textViewNota"
         tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="38dp"
+        android:layout_marginBottom="34dp"
         app:layout_constraintLeft_toLeftOf="parent" />
 
     <EditText
@@ -100,7 +102,7 @@
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
         app:layout_constraintRight_toRightOf="@+id/editTextEdad"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="7dp"
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="@+id/editTextEdad"
         app:layout_constraintTop_toTopOf="parent" />
@@ -114,7 +116,7 @@
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
         app:layout_constraintRight_toRightOf="@+id/editTextCiclo"
-        android:layout_marginTop="11dp"
+        android:layout_marginTop="14dp"
         app:layout_constraintTop_toBottomOf="@+id/editTextNombre"
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="@+id/editTextCiclo" />
@@ -128,7 +130,7 @@
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
         app:layout_constraintRight_toRightOf="@+id/editTextCurso"
-        android:layout_marginTop="9dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintTop_toBottomOf="@+id/editTextEdad"
         tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="@+id/editTextCurso" />
@@ -141,11 +143,11 @@
         android:inputType="textPersonName"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
-        app:layout_constraintRight_toRightOf="@+id/editTextNota"
-        android:layout_marginTop="9dp"
+        app:layout_constraintRight_toRightOf="@+id/editTextDespacho"
+        android:layout_marginTop="10dp"
         app:layout_constraintTop_toBottomOf="@+id/editTextCiclo"
         tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="@+id/editTextNota" />
+        app:layout_constraintLeft_toLeftOf="@+id/editTextDespacho" />
 
     <EditText
         android:id="@+id/editTextId"
@@ -156,12 +158,12 @@
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintBottom_creator="1"
-        app:layout_constraintBottom_toBottomOf="@+id/btnBorrarBBDD"
-        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnVolver"
+        android:layout_marginEnd="28dp"
         app:layout_constraintRight_toRightOf="@+id/btnBorrarBBDD"
-        android:layout_marginTop="58dp"
-        android:layout_marginBottom="53dp"
-        app:layout_constraintTop_toTopOf="@+id/btnInsertar" />
+        android:layout_marginTop="116dp"
+        android:layout_marginBottom="116dp"
+        app:layout_constraintTop_toTopOf="@+id/editTextDespacho" />
 
     <TextView
         android:id="@+id/textViewNota"
@@ -172,7 +174,7 @@
         tools:layout_constraintBottom_creator="1"
         app:layout_constraintBottom_toTopOf="@+id/btnInsertar"
         tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="14dp"
+        android:layout_marginBottom="33dp"
         app:layout_constraintLeft_toLeftOf="parent" />
 
     <Button
@@ -180,14 +182,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Volver"
-        android:layout_marginStart="16dp"
+        tools:layout_constraintBottom_creator="1"
+        android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="16dp"
-        android:layout_marginLeft="16dp"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="6dp"
         app:layout_constraintLeft_toLeftOf="parent" />
 
     <EditText
-        android:id="@+id/editTextNota"
+        android:id="@+id/editTextDespacho"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -196,7 +199,7 @@
         tools:layout_constraintRight_creator="1"
         android:layout_marginEnd="21dp"
         app:layout_constraintRight_toRightOf="@+id/btnInsertar"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@+id/editTextCurso" />
 
     <TextView
@@ -204,11 +207,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Curso:"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/textViewCiclo"
         android:layout_marginStart="16dp"
-        tools:layout_constraintTop_creator="1"
-        android:layout_marginTop="33dp"
-        app:layout_constraintTop_toBottomOf="@+id/textViewEdad"
         tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="36dp"
         app:layout_constraintLeft_toLeftOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

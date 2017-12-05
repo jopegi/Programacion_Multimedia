@@ -12,6 +12,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 //conexión y actualización de la BBDD
 public class BaseDatosHelper extends SQLiteOpenHelper{
 
+    private EstructuraBBDD estructura;
+
     //Versión de la BBDD
     public static final int DATABASE_VERSION = 1;
     //Nombre de la BBDD
@@ -35,4 +37,5 @@ public class BaseDatosHelper extends SQLiteOpenHelper{
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         onUpgrade(db, oldVersion, newVersion);
     }
+
 }

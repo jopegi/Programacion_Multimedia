@@ -7,7 +7,7 @@ import android.os.Bundle;
 public class EstructuraBBDD extends AppCompatActivity {
 
 
-    private EstructuraBBDD() {
+    public EstructuraBBDD() {
 
     }
 
@@ -19,6 +19,7 @@ public class EstructuraBBDD extends AppCompatActivity {
     //Campos tabla profesor
     public static final String NOMBRE_PROFESOR = "nombre";
     public static final String  EDAD_PROFESOR = "edad";
+    public static final String  CURSO_PROFESOR = "curso";
     public static final String  CICLO_PROFESOR = "ciclo";
     public static final String  DESPACHO_PROFESOR = "despacho";
 
@@ -30,18 +31,15 @@ public class EstructuraBBDD extends AppCompatActivity {
     public static final String  NOTA_MEDIA_ALUMNO = "nota_media";
 
     public static final String PROFESORES_CREATETABLE = "CREATE TABLE "+DATABASE_TABLE_PROFESORES+
-            " (_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre text, edad integer, ciclo text, despacho text);";
+            " (_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre text, edad integer, curso text, ciclo text, despacho text);";
 
     public static final String ALUMNOS_CREATETABLE = "CREATE TABLE "+DATABASE_TABLE_ALUMNOS+
             " (_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, nombre text, edad integer, ciclo text, curso text, nota_media real);";
 
-
-    public static final String DATABASE_DROP = "DROP TABLE IF EXISTS "+BaseDatosHelper.DATABASE_NAME;
-
-    public static final String PROFESORES_DELETETABLE = "DROP TABLE IF EXISTS "+EstructuraBBDD.DATABASE_TABLE_PROFESORES;
+    public static final String PROFESORES_DELETETABLE = "DROP TABLE IF EXISTS "+EstructuraBBDD.DATABASE_TABLE_PROFESORES+";";
 
 
-    public static final String ALUMNOS_DELETETABLE = "DROP TABLE IF EXISTS "+EstructuraBBDD.DATABASE_TABLE_ALUMNOS;
+    public static final String ALUMNOS_DELETETABLE = "DROP TABLE IF EXISTS "+EstructuraBBDD.DATABASE_TABLE_ALUMNOS+";";
 
     @Override
    protected void onCreate(Bundle savedInstanceState) {
