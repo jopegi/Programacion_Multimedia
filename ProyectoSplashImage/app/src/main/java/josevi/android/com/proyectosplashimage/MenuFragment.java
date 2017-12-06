@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,7 +36,9 @@ public class MenuFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    ArrayList<String> listaMenu;
+    //Referencia al contededor de datos que se visualizarán en nuestro RecyclerView
+    ArrayList<DatosRecyclerView> listaMenu;
+    //Referencia a nuestro RecyclerView
     RecyclerView recycler;
 
 
@@ -83,18 +86,31 @@ public class MenuFragment extends Fragment {
         // Inflate the layout for this fragment
         View vista = inflater.inflate(R.layout.fragment_menu, container, false);
 
-        listaMenu = new ArrayList<String>();
+        listaMenu = new ArrayList<DatosRecyclerView>();
 
         recycler = (RecyclerView) vista.findViewById(R.id.recycler1);
 
+        //Definimos el tipo de RecyclerView que necesitamos:
+        //>>de tipo LinearLayoutManager
+        //>>que se muestre en vertical
         recycler.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
 
-        listaMenu.add("PERFIL");
+        llenarLista();
+
+        /*listaMenu.add("PERFIL");
         listaMenu.add("JUEGO");
         listaMenu.add("INSTRUCCIONES");
-        listaMenu.add("INFORMACIÓN");
+        listaMenu.add("INFORMACIÓN");*/
 
         AdapterDatos adapter = new AdapterDatos(listaMenu);
+
+        adapter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Toast.makeText(getContext(),"Selección: "+listaMenu.get(recycler.getChildAdapterPosition(view)).getNombre(),Toast.LENGTH_SHORT).show();
+            }
+        });
 
         recycler.setAdapter(adapter);
 
@@ -102,6 +118,11 @@ public class MenuFragment extends Fragment {
     }
 
     private void llenarLista() {
+
+        listaMenu.add(new DatosRecyclerView("Perfil",R.drawable.perfil));
+        listaMenu.add(new DatosRecyclerView("Juego",R.drawable.juego));
+        listaMenu.add(new DatosRecyclerView("Instrucciones",R.drawable.instrucciones));
+        listaMenu.add(new DatosRecyclerView("Información",R.drawable.informacion));
 
     }
 

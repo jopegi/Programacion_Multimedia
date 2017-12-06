@@ -2,17 +2,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="5dp"
     android:orientation="vertical"
     tools:context="josevi.android.com.proyectosplashimage.MenuFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="RecyclerView"
-        android:textSize="30dp"
-        android:layout_marginBottom="20dp"/>
+        android:layout_margin="2dp"
+        android:background="@android:color/holo_blue_bright"
+        android:text="Mi RecyclerView"
+        android:textAlignment="center"
+        android:textColor="@android:color/background_light"
+        android:textSize="30dp" />
 
     <!--Componente RecyclerView-->
     <android.support.v7.widget.RecyclerView
