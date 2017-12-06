@@ -9,18 +9,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!--Se especifica que la que la primera actividad a
-        ejecutar cuando arranque la aplicación sea la SplashActivity.java-->
+
+        <!--
+        Se especifica que la que la primera actividad a
+        ejecutar cuando arranque la aplicación sea la SplashActivity.java
+        -->
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--Se define especifica que la que tras la SplashActivity.java
-        se ejecute la MainActivity.java-->
-        <activity android:name=".MainActivity"></activity>
+
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".MenuActivity"/>
     </application>
 
 </manifest>
-

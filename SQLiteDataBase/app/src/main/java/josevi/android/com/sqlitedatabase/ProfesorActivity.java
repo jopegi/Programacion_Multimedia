@@ -23,7 +23,7 @@ import static josevi.android.com.sqlitedatabase.BaseDatosHelper.DATABASE_NAME;
 
 public class ProfesorActivity extends AppCompatActivity {
 
-    private Button botonInsertar, botonBorrarRegistro, botonBorrarBBDD, botonVolver;
+    private Button botonInsertar, botonBorrarRegistro, botonBorrarBBDD, botonVolver, botonBuscar;
     private EditText cajaNombre, cajaEdad, cajaCiclo, cajaCurso, cajaDespacho, cajaId;
 
     BaseDatosHelper miBBDDHelper = null;
@@ -39,6 +39,7 @@ public class ProfesorActivity extends AppCompatActivity {
         botonBorrarRegistro = (Button) findViewById(R.id.btnBorrarId);
         botonBorrarBBDD = (Button) findViewById(R.id.btnBorrarBBDD);
         botonVolver = (Button) findViewById(R.id.btnVolver);
+        botonBuscar = (Button) findViewById(R.id.btnBuscar);
 
         cajaNombre = (EditText) findViewById(R.id.editTextNombre);
         cajaEdad = (EditText) findViewById(R.id.editTextEdad);
@@ -50,6 +51,17 @@ public class ProfesorActivity extends AppCompatActivity {
 
         //Instaciamos un objeto de tipo SQLiteOpenHelper
         miBBDDHelper = new BaseDatosHelper(this, DATABASE_NAME, null, BaseDatosHelper.DATABASE_VERSION);
+
+        //Listener del botón búsquedas
+        botonBuscar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intentBuscar = new Intent(ProfesorActivity.this, ConsultasActivity.class);
+
+                startActivity(intentBuscar);
+            }
+        });
 
 
         //Listener del botón volver a la interfaz principal

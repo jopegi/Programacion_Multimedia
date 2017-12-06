@@ -18,7 +18,8 @@
         </activity>
         <activity android:name=".EstructuraBBDD" />
         <activity android:name=".ProfesorActivity" />
-        <activity android:name=".AlumnoActivity"/>
+        <activity android:name=".AlumnoActivity" />
+        <activity android:name=".ConsultasActivity"></activity>
     </application>
 
 </manifest>

@@ -44,8 +44,10 @@ public class SplashActivity extends Activity {
                 //el Contexto desde el que partimos y la clase hasta la
                 //que nos "desplazaremos". Así, con el Intent indicamos que queremos
                 //pasar de la actividad SplashActivity a la MainActivity
+                /*Intent mainIntent = new Intent().setClass(
+                        SplashActivity.this, MainActivity.class);*/
                 Intent mainIntent = new Intent().setClass(
-                        SplashActivity.this, MainActivity.class);
+                        SplashActivity.this, MenuActivity.class);
                 //Lanzamos el Intent
                 startActivity(mainIntent);
 
