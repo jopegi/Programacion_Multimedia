@@ -4,39 +4,55 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="josevi.android.com.sqlitedatabase.ConsultasActivity">
+    tools:context="josevi.android.com.sqlitedatabase.ConsultasActivity"
+    tools:layout_editor_absoluteY="81dp"
+    tools:layout_editor_absoluteX="0dp">
 
     <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        />
+        app:layout_constraintRight_toLeftOf="@+id/btnBuscarCurso"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/editTextCurso"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintTop_toTopOf="@+id/editTextCurso"
+        android:id="@+id/radioGroup" />
 
     <RadioButton
         android:id="@+id/radioBtnProfesores"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="43dp"
         android:text="Profesores"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_constraintTop_creator="1"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTablas"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <RadioButton
         android:id="@+id/radioBtnAlumnos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
         android:text="Alumnos"
-        app:layout_constraintLeft_toLeftOf="parent"
-        tools:layout_editor_absoluteY="86dp" />
+        tools:layout_constraintTop_creator="1"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="11dp"
+        app:layout_constraintTop_toBottomOf="@+id/radioBtnProfesores"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <TextView
         android:id="@+id/textViewTablas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
         android:text="Tablas:"
+        tools:layout_constraintTop_creator="1"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        tools:layout_constraintLeft_creator="1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,55 +60,113 @@
         android:id="@+id/textViewCiclos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
         android:text="Ciclo:"
-        app:layout_constraintLeft_toLeftOf="parent"
-        tools:layout_editor_absoluteY="137dp" />
+        tools:layout_constraintTop_creator="1"
+        android:layout_marginTop="19dp"
+        app:layout_constraintTop_toBottomOf="@+id/radioBtnAlumnos"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="@+id/editTextCiclo" />
 
     <EditText
         android:id="@+id/editTextCiclo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintLeft_toLeftOf="parent"
-        tools:layout_editor_absoluteY="167dp" />
+        app:layout_constraintRight_toLeftOf="@+id/btnBuscarCiclo"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnBuscarCiclo"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCiclos"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <TextView
         android:id="@+id/textViewCursos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
         android:text="Curso:"
-        app:layout_constraintLeft_toLeftOf="parent"
-        tools:layout_editor_absoluteY="224dp" />
+        tools:layout_constraintTop_creator="1"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="14dp"
+        app:layout_constraintTop_toBottomOf="@+id/editTextCiclo"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <EditText
         android:id="@+id/editTextCurso"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
         android:ems="10"
         android:inputType="textPersonName"
-        app:layout_constraintLeft_toLeftOf="parent"
-        tools:layout_editor_absoluteY="261dp" />
+        app:layout_constraintRight_toLeftOf="@+id/radioGroup"
+        tools:layout_constraintRight_creator="1"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnBuscarCurso"
+        tools:layout_constraintBaseline_creator="1"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <Button
-        android:id="@+id/btnMostrar"
-        android:layout_width="wrap_content"
+        android:id="@+id/btnBuscarCicloCurso"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:text="Mostrar"
-        app:layout_constraintLeft_toLeftOf="parent"
-        tools:layout_editor_absoluteY="328dp" />
+        android:text="Buscar por ciclo y curso"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="135dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <Button
         android:id="@+id/btnMostrarTodos"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Mostrar todos"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/btnBuscarCicloCurso"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <Button
+        android:id="@+id/btnBuscarCiclo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:text="Mostrar todos"
-        app:layout_constraintLeft_toLeftOf="parent"
-        tools:layout_editor_absoluteY="392dp" />
+        android:text="Buscar por ciclo"
+        android:layout_marginRight="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginEnd="16dp"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toBottomOf="@+id/btnBuscarCurso"
+        android:layout_marginTop="91dp"
+        app:layout_constraintTop_toBottomOf="@+id/radioBtnProfesores"
+        android:layout_marginBottom="90dp" />
+
+    <Button
+        android:id="@+id/btnBuscarCurso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="31dp"
+        android:text="Buscar por curso"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginEnd="31dp"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toTopOf="@+id/btnBuscarCicloCurso"
+        android:layout_marginBottom="24dp" />
 </android.support.constraint.ConstraintLayout>

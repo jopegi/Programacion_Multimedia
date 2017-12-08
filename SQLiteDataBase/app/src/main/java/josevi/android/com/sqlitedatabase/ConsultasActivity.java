@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class ConsultasActivity extends AppCompatActivity {
 
 
-    private Button botonMostrar, botonMostrarTodos;
+    private Button botonMostrar, botonMostrarTodos, botonCiclo, botonCurso;
     private EditText cajaCiclo, cajaCurso;
     private RadioButton radioProfesores, radioAlumnos;
     private BaseDatosHelper miBBDDHelper = null;
@@ -28,8 +28,10 @@ public class ConsultasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consultas);
 
-        botonMostrar = (Button) findViewById(R.id.btnMostrar);
+        botonMostrar = (Button) findViewById(R.id.btnBuscarCicloCurso);
         botonMostrarTodos = (Button) findViewById(R.id.btnMostrarTodos);
+        botonCiclo = (Button) findViewById(R.id.btnBuscarCiclo);
+        botonCurso = (Button) findViewById(R.id.btnBuscarCurso);
 
         cajaCiclo = (EditText) findViewById(R.id.editTextCiclo);
         cajaCurso = (EditText) findViewById(R.id.editTextCurso);
@@ -37,6 +39,22 @@ public class ConsultasActivity extends AppCompatActivity {
         radioProfesores = (RadioButton) findViewById(R.id.radioBtnProfesores);
         radioAlumnos = (RadioButton) findViewById(R.id.radioBtnAlumnos);
 
+        botonCiclo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                recuperarPorCiclo(Integer.valueOf(cajaCiclo.getText().toString()));
+
+            }
+        });
+
+        botonCurso.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                recuperarPorCurso(cajaCurso.getText().toString());
+            }
+        });
 
         botonMostrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,27 +68,123 @@ public class ConsultasActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                recuperarTodos();
+
             }
         });
     }
+
+
+    public Cursor cargarCursor(){
+
+        Cursor c = null;
+
+        SQLiteDatabase db = miBBDDHelper.getReadableDatabase();
+
+        if(radioProfesores.isChecked()){
+
+            String[] columnas = new String[] {"_id","nombre","edad","ciclo","curso","despacho"};
+
+            c = db.query("profesores",columnas,null,null,null,null,null);
+        }
+
+        if(radioAlumnos.isChecked()){
+
+            String[] columnas = new String[] {"_id","nombre","edad","ciclo","curso","nota_media"};
+
+            c = db.query("alumnos",columnas,null,null,null,null,null);
+
+        }
+        return c;
+    }
+
 
 
     public ArrayList<String> recuperarTodos(){
 
         ArrayList<String> rtn = null;
 
+        SQLiteDatabase db = miBBDDHelper.getReadableDatabase();
+
         if(radioProfesores.isChecked()){
-            tableName = EstructuraBBDD.DATABASE_TABLE_PROFESORES;
+
+            ArrayList<String> profesores = new ArrayList<String>();
+
+            try {
+
+                Cursor cursor = db.rawQuery(" SELECT * FROM profesores", null);
+
+                if (cursor != null && cursor.moveToFirst()) {
+                    do {
+                        profesores.add(cursor.getString(0)+cursor.getString(1)+cursor.getString(2)+
+                                cursor.getString(3)+cursor.getString(4));
+
+                    } while (cursor.moveToNext());
+                }
+
+
+                db.close();
+
+                Toast.makeText(getApplicationContext(), "Se han recuperado todos los registros!", Toast.LENGTH_SHORT).show();
+
+            } catch (Exception e) {
+
+                Toast.makeText(getApplicationContext(), "No hubo resultados de búsqueda!", Toast.LENGTH_SHORT).show();
+
+            }
+
+            rtn = profesores;
         }
 
         if(radioAlumnos.isChecked()){
-            tableName = EstructuraBBDD.DATABASE_TABLE_ALUMNOS;
+
+            ArrayList<String> alumnos = new ArrayList<String>();
+
+
+            try {
+
+                Cursor cursor = db.rawQuery(" SELECT * FROM alumnos", null);
+
+                if (cursor != null && cursor.moveToFirst()) {
+                    do {
+                        alumnos.add(cursor.getString(0)+cursor.getString(1)+cursor.getString(2)+
+                                cursor.getString(3)+cursor.getString(4));
+
+                    } while (cursor.moveToNext());
+                }
+
+                db.close();
+
+                Toast.makeText(getApplicationContext(), "Se han recuperado todos los registros!!", Toast.LENGTH_SHORT).show();
+
+
+            } catch (Exception e) {
+
+                Toast.makeText(getApplicationContext(), "No hubo resultados de búsqueda!", Toast.LENGTH_SHORT).show();
+
+            }
+
+            rtn = alumnos;
         }
 
+        return rtn;
+
+        }
+
+
+
+
+    public ArrayList<String> recuperarPorCurso(String curso){
+
+        ArrayList<String> rtn = null;
         SQLiteDatabase db = miBBDDHelper.getReadableDatabase();
 
+        //String curso = cajaCurso.getText().toString();
 
-        if(tableName.equals("profesores")) {
+
+        if(radioProfesores.isChecked()){
+
+            tableName = EstructuraBBDD.DATABASE_TABLE_PROFESORES;
 
             ArrayList<String> profesores = new ArrayList<String>();
 
@@ -79,33 +193,41 @@ public class ConsultasActivity extends AppCompatActivity {
                     EstructuraBBDD.NOMBRE_PROFESOR,
                     EstructuraBBDD.EDAD_PROFESOR,
                     EstructuraBBDD.CICLO_PROFESOR,
-                    EstructuraBBDD.CURSO_PROFESOR,
+                    //EstructuraBBDD.CURSO_PROFESOR,
                     EstructuraBBDD.DESPACHO_PROFESOR
             };
+
+            //Indica el campo por el cual se filtrará la consulta. En esta caso por _id
+            String selection = EstructuraBBDD.CICLO_PROFESOR + " = ?";
+            //Indica de donde se obtiene el valor del campo anterior
+            String[] selectionArgs = {curso};
+
+            //Podemos indicar si deseamos que se ordene el resultado de la consulta de filtrado
+        /*String sortOrder =
+                FeedEntry.COLUMN_NAME_SUBTITLE + " DESC";*/
 
             try {
 
                 //En un objeto de tipo Cursor se almacenarán los resultados de la consulta
                 Cursor cursor = db.query(
-                        EstructuraBBDD.DATABASE_TABLE_PROFESORES,   // La tabla de consulta
-                        null,                                       // Las columnas a devolver
-                        null,                                       // Las columnas para la cláusula Where
-                        null,                                       // Los valores para la cláusula Where
-                        null,                                       // Sin agrupamiento de las filas
-                        null,                                       // sin filtro sobre el agrupamiento de las filas
-                        null                                        // Sin ordenamiento
+                        EstructuraBBDD.DATABASE_TABLE_PROFESORES,  // La tabla de consulta
+                        projection,                               // Las columnas a devolver
+                        selection,                                // Las columnas para la cláusula Where
+                        selectionArgs,                            // Los valores para la cláusula Where
+                        null,                                     // Sin agrupamiento de las filas
+                        null,                                     // sin filtro sobre el agrupamiento de las filas
+                        null                                      // Sin ordenamiento
                 );
 
                 if (cursor != null && cursor.moveToFirst()) {
                     do {
-                        profesores.add(cursor.getString(1));
-                        profesores.add(cursor.getString(2));
-                        profesores.add(cursor.getString(3));
-                        profesores.add(cursor.getString(4));
+                        profesores.add(cursor.getString(0)+cursor.getString(1)+cursor.getString(2)+cursor.getString(4));
                     } while (cursor.moveToNext());
                 }
 
                 db.close();
+
+                Toast.makeText(getApplicationContext(), "Se han recuperado todos los registros!!", Toast.LENGTH_SHORT).show();
 
 
             } catch (Exception e) {
@@ -117,7 +239,8 @@ public class ConsultasActivity extends AppCompatActivity {
             rtn = profesores;
         }
 
-        if(tableName.equals("alumnos")) {
+        if(radioAlumnos.isChecked()){
+            tableName = EstructuraBBDD.DATABASE_TABLE_ALUMNOS;
 
             ArrayList<String> alumnos = new ArrayList<String>();
 
@@ -126,29 +249,35 @@ public class ConsultasActivity extends AppCompatActivity {
                     EstructuraBBDD.NOMBRE_ALUMNO,
                     EstructuraBBDD.EDAD_ALUMNO,
                     EstructuraBBDD.CICLO_ALUMNO,
-                    EstructuraBBDD.CURSO_ALUMNO,
+                    //EstructuraBBDD.CURSO_ALUMNO,
                     EstructuraBBDD.NOTA_MEDIA_ALUMNO
             };
+
+            //Indica el campo por el cual se filtrará la consulta. En esta caso por _id
+            String selection = EstructuraBBDD.CICLO_ALUMNO + " = ?";
+            //Indica de donde se obtiene el valor del campo anterior
+            String[] selectionArgs = {curso};
+
+            //Podemos indicar si deseamos que se ordene el resultado de la consulta de filtrado
+        /*String sortOrder =
+                FeedEntry.COLUMN_NAME_SUBTITLE + " DESC";*/
 
             try {
 
                 //En un objeto de tipo Cursor se almacenarán los resultados de la consulta
                 Cursor cursor = db.query(
-                        EstructuraBBDD.DATABASE_TABLE_ALUMNOS,      // La tabla de consulta
-                        null,                                       // Las columnas a devolver
-                        null,                                       // Las columnas para la cláusula Where
-                        null,                                       // Los valores para la cláusula Where
-                        null,                                       // Sin agrupamiento de las filas
-                        null,                                       // sin filtro sobre el agrupamiento de las filas
-                        null                                        // Sin ordenamiento
+                        EstructuraBBDD.DATABASE_TABLE_ALUMNOS,  // La tabla de consulta
+                        projection,                               // Las columnas a devolver
+                        selection,                                // Las columnas para la cláusula Where
+                        selectionArgs,                            // Los valores para la cláusula Where
+                        null,                                     // Sin agrupamiento de las filas
+                        null,                                     // sin filtro sobre el agrupamiento de las filas
+                        null                                      // Sin ordenamiento
                 );
 
                 if (cursor != null && cursor.moveToFirst()) {
                     do {
-                        alumnos.add(cursor.getString(1));
-                        alumnos.add(cursor.getString(2));
-                        alumnos.add(cursor.getString(3));
-                        alumnos.add(cursor.getString(4));
+                        alumnos.add(cursor.getString(0)+cursor.getString(1)+cursor.getString(2)+cursor.getString(4));
                     } while (cursor.moveToNext());
                 }
 
@@ -168,29 +297,17 @@ public class ConsultasActivity extends AppCompatActivity {
     }
 
 
-    public ArrayList<String> recuperar(){
+    public ArrayList<String> recuperarPorCiclo(int ciclo){
 
         ArrayList<String> rtn = null;
+        SQLiteDatabase db = miBBDDHelper.getReadableDatabase();
 
-        //String ciclo = "";
-        //String curso = "";
-
-        String ciclo = cajaCiclo.getText().toString();
-        String curso = cajaCurso.getText().toString();
+        //String curso = cajaCurso.getText().toString();
 
 
         if(radioProfesores.isChecked()){
+
             tableName = EstructuraBBDD.DATABASE_TABLE_PROFESORES;
-        }
-
-        if(radioAlumnos.isChecked()){
-            tableName = EstructuraBBDD.DATABASE_TABLE_ALUMNOS;
-        }
-
-        SQLiteDatabase db = miBBDDHelper.getReadableDatabase();
-
-
-        if(tableName.equals("profesores") && ciclo.toString().length()>0 && curso.toString().length()>0) {
 
             ArrayList<String> profesores = new ArrayList<String>();
 
@@ -199,14 +316,14 @@ public class ConsultasActivity extends AppCompatActivity {
                     EstructuraBBDD.NOMBRE_PROFESOR,
                     EstructuraBBDD.EDAD_PROFESOR,
                     //EstructuraBBDD.CICLO_PROFESOR,
-                    //EstructuraBBDD.CURSO_PROFESOR,
+                    EstructuraBBDD.CURSO_PROFESOR,
                     EstructuraBBDD.DESPACHO_PROFESOR
             };
 
             //Indica el campo por el cual se filtrará la consulta. En esta caso por _id
-            String selection = EstructuraBBDD.CICLO_PROFESOR + " = ?, "+EstructuraBBDD.CURSO_PROFESOR+" = ?";
+            String selection = EstructuraBBDD.CICLO_PROFESOR + " = ?";
             //Indica de donde se obtiene el valor del campo anterior
-            String[] selectionArgs = {cajaCiclo.getText().toString(), cajaCurso.getText().toString()};
+            String[] selectionArgs = {String.valueOf(ciclo)};
 
             //Podemos indicar si deseamos que se ordene el resultado de la consulta de filtrado
         /*String sortOrder =
@@ -227,13 +344,13 @@ public class ConsultasActivity extends AppCompatActivity {
 
                 if (cursor != null && cursor.moveToFirst()) {
                     do {
-                        profesores.add(cursor.getString(1));
-                        profesores.add(cursor.getString(2));
-                        profesores.add(cursor.getString(5));
+                        profesores.add(cursor.getString(0)+cursor.getString(1)+cursor.getString(3)+cursor.getString(4));
                     } while (cursor.moveToNext());
                 }
 
                 db.close();
+
+                Toast.makeText(getApplicationContext(), "Se han recuperado todos los registros!!", Toast.LENGTH_SHORT).show();
 
 
             } catch (Exception e) {
@@ -245,7 +362,8 @@ public class ConsultasActivity extends AppCompatActivity {
             rtn = profesores;
         }
 
-        if(tableName.equals("alumnos")&& ciclo.toString().length()>0 && curso.toString().length()>0) {
+        if(radioAlumnos.isChecked()){
+            tableName = EstructuraBBDD.DATABASE_TABLE_ALUMNOS;
 
             ArrayList<String> alumnos = new ArrayList<String>();
 
@@ -254,14 +372,14 @@ public class ConsultasActivity extends AppCompatActivity {
                     EstructuraBBDD.NOMBRE_ALUMNO,
                     EstructuraBBDD.EDAD_ALUMNO,
                     //EstructuraBBDD.CICLO_ALUMNO,
-                    //EstructuraBBDD.CURSO_ALUMNO,
+                    EstructuraBBDD.CURSO_ALUMNO,
                     EstructuraBBDD.NOTA_MEDIA_ALUMNO
             };
 
             //Indica el campo por el cual se filtrará la consulta. En esta caso por _id
-            String selection = EstructuraBBDD.CICLO_ALUMNO + " = ?, "+EstructuraBBDD.CURSO_ALUMNO+" = ?";
+            String selection = EstructuraBBDD.CICLO_ALUMNO + " = ?";
             //Indica de donde se obtiene el valor del campo anterior
-            String[] selectionArgs = {cajaCiclo.getText().toString(),cajaCurso.getText().toString()};
+            String[] selectionArgs = {String.valueOf(ciclo)};
 
             //Podemos indicar si deseamos que se ordene el resultado de la consulta de filtrado
         /*String sortOrder =
@@ -271,7 +389,7 @@ public class ConsultasActivity extends AppCompatActivity {
 
                 //En un objeto de tipo Cursor se almacenarán los resultados de la consulta
                 Cursor cursor = db.query(
-                        EstructuraBBDD.DATABASE_TABLE_PROFESORES,  // La tabla de consulta
+                        EstructuraBBDD.DATABASE_TABLE_ALUMNOS,  // La tabla de consulta
                         projection,                               // Las columnas a devolver
                         selection,                                // Las columnas para la cláusula Where
                         selectionArgs,                            // Los valores para la cláusula Where
@@ -282,9 +400,7 @@ public class ConsultasActivity extends AppCompatActivity {
 
                 if (cursor != null && cursor.moveToFirst()) {
                     do {
-                        alumnos.add(cursor.getString(1));
-                        alumnos.add(cursor.getString(2));
-                        alumnos.add(cursor.getString(5));
+                        alumnos.add(cursor.getString(0)+cursor.getString(1)+cursor.getString(3)+cursor.getString(4));
                     } while (cursor.moveToNext());
                 }
 
@@ -303,5 +419,119 @@ public class ConsultasActivity extends AppCompatActivity {
         return rtn;
     }
 
+    //***************************************************
+    //***************************************************
+    public Cursor cargarCursorProfesores(){
 
+        String[] columnas = new String[]{"_id",EstructuraBBDD.NOMBRE_PROFESOR,EstructuraBBDD.EDAD_PROFESOR,EstructuraBBDD.CICLO_PROFESOR,
+                EstructuraBBDD.CURSO_PROFESOR,EstructuraBBDD.DESPACHO_PROFESOR};
+
+        SQLiteDatabase db = miBBDDHelper.getReadableDatabase();
+
+        return db.query(EstructuraBBDD.DATABASE_TABLE_PROFESORES,columnas,null,null,null,null,null);
+
+    }
+    //********************************************************
+    //********************************************************
+
+    //***************************************************
+    //***************************************************
+    public Cursor cargarCursorAlumnos(){
+
+        String[] columnas = new String[]{"_id",EstructuraBBDD.NOMBRE_ALUMNO,EstructuraBBDD.EDAD_ALUMNO,EstructuraBBDD.CICLO_ALUMNO,
+                EstructuraBBDD.CURSO_ALUMNO,EstructuraBBDD.NOTA_MEDIA_ALUMNO};
+
+        SQLiteDatabase db = miBBDDHelper.getReadableDatabase();
+
+        return db.query(EstructuraBBDD.DATABASE_TABLE_PROFESORES,columnas,null,null,null,null,null);
+
+    }
+    //********************************************************
+    //********************************************************
+
+    //***************************************************
+    //***************************************************
+    public Cursor buscarProfesoresPorCurso(String curso){
+
+        String[] columnas = new String[]{"_id",EstructuraBBDD.NOMBRE_PROFESOR,EstructuraBBDD.EDAD_PROFESOR,EstructuraBBDD.CICLO_PROFESOR,
+                EstructuraBBDD.CURSO_PROFESOR,EstructuraBBDD.DESPACHO_PROFESOR};
+
+        SQLiteDatabase db = miBBDDHelper.getReadableDatabase();
+
+        return db.query(EstructuraBBDD.DATABASE_TABLE_PROFESORES,columnas,EstructuraBBDD.CURSO_PROFESOR + "=?",new String []{curso},null,null,null);
+
+    }
+    //********************************************************
+    //********************************************************
+
+    public Cursor buscarProfesoresPorCiclo(String ciclo){
+
+        String[] columnas = new String[]{"_id",EstructuraBBDD.NOMBRE_PROFESOR,EstructuraBBDD.EDAD_PROFESOR,EstructuraBBDD.CICLO_PROFESOR,
+                EstructuraBBDD.CURSO_PROFESOR,EstructuraBBDD.DESPACHO_PROFESOR};
+
+        SQLiteDatabase db = miBBDDHelper.getReadableDatabase();
+
+        return db.query(EstructuraBBDD.DATABASE_TABLE_PROFESORES,columnas,EstructuraBBDD.CICLO_PROFESOR + "=?",new String []{ciclo},null,null,null);
+
+    }
+    //********************************************************
+    //********************************************************
+
+    //***************************************************
+    //***************************************************
+    public Cursor buscarAlumnosPorCurso(String curso){
+
+        String[] columnas = new String[]{"_id",EstructuraBBDD.NOMBRE_ALUMNO,EstructuraBBDD.EDAD_ALUMNO,EstructuraBBDD.CICLO_ALUMNO,
+                EstructuraBBDD.CURSO_ALUMNO,EstructuraBBDD.NOTA_MEDIA_ALUMNO};
+
+        SQLiteDatabase db = miBBDDHelper.getReadableDatabase();
+
+        return db.query(EstructuraBBDD.DATABASE_TABLE_ALUMNOS,columnas,EstructuraBBDD.CURSO_ALUMNO + "=?",new String []{curso},null,null,null);
+
+    }
+    //********************************************************
+    //********************************************************
+
+    public Cursor buscarAlumnosPorCiclo(String ciclo){
+
+        String[] columnas = new String[]{"_id",EstructuraBBDD.NOMBRE_ALUMNO,EstructuraBBDD.EDAD_ALUMNO,EstructuraBBDD.CICLO_ALUMNO,
+                EstructuraBBDD.CURSO_ALUMNO,EstructuraBBDD.NOTA_MEDIA_ALUMNO};
+
+        SQLiteDatabase db = miBBDDHelper.getReadableDatabase();
+
+        return db.query(EstructuraBBDD.DATABASE_TABLE_ALUMNOS,columnas,EstructuraBBDD.CURSO_ALUMNO + "=?",new String []{ciclo},null,null,null);
+
+    }
+    //********************************************************
+    //********************************************************
+
+    //***************************************************
+    //***************************************************
+    public Cursor buscarProfesoresPorCursoYCiclo(String curso, String ciclo){
+
+        String[] columnas = new String[]{"_id",EstructuraBBDD.NOMBRE_PROFESOR,EstructuraBBDD.EDAD_PROFESOR,EstructuraBBDD.CICLO_PROFESOR,
+                EstructuraBBDD.CURSO_PROFESOR,EstructuraBBDD.DESPACHO_PROFESOR};
+
+        SQLiteDatabase db = miBBDDHelper.getReadableDatabase();
+
+        return db.query(EstructuraBBDD.DATABASE_TABLE_PROFESORES,columnas,EstructuraBBDD.CURSO_PROFESOR + " = '?' AND " + EstructuraBBDD.CICLO_PROFESOR+" = '?'",new String []{curso,ciclo},null,null,null);
+
+    }
+    //********************************************************
+    //********************************************************
+
+    //***************************************************
+    //***************************************************
+    public Cursor buscarAlumnosPorCursoYCiclo(String curso, String ciclo){
+
+        String[] columnas = new String[]{"_id",EstructuraBBDD.NOMBRE_ALUMNO,EstructuraBBDD.EDAD_ALUMNO,EstructuraBBDD.CICLO_ALUMNO,
+                EstructuraBBDD.CURSO_ALUMNO,EstructuraBBDD.NOTA_MEDIA_ALUMNO};
+
+        SQLiteDatabase db = miBBDDHelper.getReadableDatabase();
+
+        return db.query(EstructuraBBDD.DATABASE_TABLE_ALUMNOS,columnas,EstructuraBBDD.CURSO_ALUMNO + " = '?' AND " + EstructuraBBDD.CICLO_ALUMNO + " = '?'",new String []{curso,ciclo},null,null,null);
+
+    }
+    //********************************************************
+    //********************************************************
 }
