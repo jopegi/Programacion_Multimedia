@@ -13,12 +13,15 @@ public class VisorConsultasActivity extends AppCompatActivity {
     private EstructuraBBDD ebd;
     private BaseDatosHelper db;
     private Cursor cursor;
+
     private ListView lista;
-    SimpleCursorAdapter adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_visor_consultas);
+
+        lista = (ListView) findViewById(R.id.listView);
     }
 }

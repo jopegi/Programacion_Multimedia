@@ -45,7 +45,7 @@ public class ProfesorActivity extends AppCompatActivity {
         cajaEdad = (EditText) findViewById(R.id.editTextEdad);
         cajaCurso = (EditText) findViewById(R.id.editTextCurso);
         cajaCiclo = (EditText) findViewById(R.id.editTextCiclo);
-        cajaDespacho = (EditText) findViewById(R.id.editTextCurso);
+        cajaDespacho = (EditText) findViewById(R.id.editTextDespacho);
 
         cajaId = (EditText) findViewById(R.id.editTextId);
 
@@ -90,8 +90,8 @@ public class ProfesorActivity extends AppCompatActivity {
                 //Insertamos los datos en el contenedor
                 values.put(EstructuraBBDD.NOMBRE_PROFESOR, cajaNombre.getText().toString());
                 values.put(EstructuraBBDD.EDAD_PROFESOR, Integer.valueOf(cajaEdad.getText().toString()));
-                values.put(EstructuraBBDD.CURSO_PROFESOR, cajaCurso.getText().toString());
-                values.put(EstructuraBBDD.CICLO_PROFESOR, cajaCiclo.getText().toString());
+                values.put(EstructuraBBDD.CURSO_PROFESOR, cajaCiclo.getText().toString());
+                values.put(EstructuraBBDD.CICLO_PROFESOR, cajaCurso.getText().toString());
                 values.put(EstructuraBBDD.DESPACHO_PROFESOR, cajaDespacho.getText().toString());
 
                 //Comprobación de valores: los imprimimos en el log

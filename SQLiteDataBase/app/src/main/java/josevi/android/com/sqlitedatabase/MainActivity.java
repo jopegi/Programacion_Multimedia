@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
         btnProfesores = (Button) findViewById(R.id.btnProfesores);
         btnAlumnos = (Button) findViewById(R.id.btnAlumnos);
 
+        //Botón que lleva a ProfesorActivity
         btnProfesores.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Botón que lleva a AlumnoActivity
         btnAlumnos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -87,8 +87,8 @@ public class AlumnoActivity extends AppCompatActivity {
                 //Insertamos los datos en el contenedor
                 values.put("nombre", cajaNombre.getText().toString());
                 values.put("edad", Integer.valueOf(cajaEdad.getText().toString()));
-                values.put("ciclo", cajaCiclo.getText().toString());
-                values.put("curso", cajaCurso.getText().toString());
+                values.put("curso", cajaCiclo.getText().toString());
+                values.put("ciclo", cajaCurso.getText().toString());
                 values.put("nota_media", Float.valueOf(cajaNotaMedia.getText().toString()));
 
                 //Comprobación de valores: los imprimimos en el log
