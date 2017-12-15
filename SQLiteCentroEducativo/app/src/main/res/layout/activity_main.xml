@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    tools:context="josevi.android.com.sqlitecentroeducativo.MainActivity">
+
+    <TextView
+        android:id="@+id/TextViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="56dp"
+        android:layout_marginTop="70dp"
+        android:background="@android:color/darker_gray"
+        android:gravity="center_horizontal"
+        android:padding="10dp"
+        android:text="Centro Educativo Database"
+        android:textColor="@android:color/background_light"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnProfesores"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/TextViewTitle"
+        android:layout_marginBottom="137dp"
+        android:background="@android:color/holo_blue_dark"
+        android:padding="10dp"
+        android:text="Profesores"
+        android:textColor="@android:color/background_light" />
+
+    <Button
+        android:id="@+id/btnAlumnos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/TextViewTitle"
+        android:layout_alignTop="@+id/btnProfesores"
+        android:background="@android:color/holo_blue_light"
+        android:padding="10dp"
+        android:text="Alumnos"
+        android:textColor="@android:color/background_light" />
+
+</RelativeLayout>
