@@ -95,6 +95,8 @@ public class ProfesoresActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Inserción fallida!", Toast.LENGTH_LONG).show();
                 }
 
+                vaciarCajas();
+
             }
         });
 
@@ -126,6 +128,8 @@ public class ProfesoresActivity extends AppCompatActivity {
                         db.close();
                     }
                 }
+
+                cajaId.setText("");
 
             }
         });
@@ -237,6 +241,14 @@ public class ProfesoresActivity extends AppCompatActivity {
         db.delete("profesores", "_id=" + id, null);
         //Cerramos la BBDD
         db.close();
+    }
 
+    public void vaciarCajas(){
+
+        cajaNombre.setText("");
+        cajaEdad.setText("");
+        cajaCiclo.setText("");
+        cajaCurso.setText("");
+        cajaDespacho.setText("");
     }
 }

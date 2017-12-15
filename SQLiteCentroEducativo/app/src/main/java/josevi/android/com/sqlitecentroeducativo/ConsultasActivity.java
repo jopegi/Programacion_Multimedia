@@ -119,6 +119,7 @@ public class ConsultasActivity extends AppCompatActivity {
                 }
 
 
+                cajaCiclo.setText("");
             }
         });
 
@@ -180,6 +181,8 @@ public class ConsultasActivity extends AppCompatActivity {
                     miLista.setAdapter(adaptador);
                 }
 
+                cajaCurso.setText("");
+
             }
         });
 
@@ -238,6 +241,9 @@ public class ConsultasActivity extends AppCompatActivity {
                     //Mostramos los resultados en un listView
                     miLista.setAdapter(adaptador);
                 }
+
+                cajaCiclo.setText("");
+                cajaCurso.setText("");
 
             }
         });

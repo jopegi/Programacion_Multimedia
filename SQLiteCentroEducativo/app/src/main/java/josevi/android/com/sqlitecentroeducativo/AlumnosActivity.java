@@ -95,6 +95,8 @@ public class AlumnosActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Inserción fallida!", Toast.LENGTH_LONG).show();
                 }
 
+                vaciarCajas();
+
             }
         });
 
@@ -127,6 +129,7 @@ public class AlumnosActivity extends AppCompatActivity {
                     }
                 }
 
+                cajaId.setText("");
             }
         });
 
@@ -238,5 +241,14 @@ public class AlumnosActivity extends AppCompatActivity {
         //Cerramos la BBDD
         db.close();
 
+    }
+
+    public void vaciarCajas(){
+
+        cajaNombre.setText("");
+        cajaEdad.setText("");
+        cajaCiclo.setText("");
+        cajaCurso.setText("");
+        cajaNota.setText("");
     }
 }
