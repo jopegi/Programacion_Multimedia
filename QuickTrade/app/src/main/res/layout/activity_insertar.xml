@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="josevi.android.com.quicktrade.InsertarActivity">
+
+    <TextView
+        android:id="@+id/labelNick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="17dp"
+        android:text="Nick:"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:id="@+id/cajaNick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/labelNick"
+        android:layout_marginEnd="25dp"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/labelNombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/labelNick"
+        android:layout_below="@+id/cajaNick"
+        android:layout_marginTop="25dp"
+        android:text="Nombre:" />
+
+    <EditText
+        android:id="@+id/cajaNombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/cajaNick"
+        android:layout_alignTop="@+id/labelNombre"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/labelApellidos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/labelNombre"
+        android:layout_below="@+id/cajaNombre"
+        android:layout_marginTop="26dp"
+        android:text="Apellidos:" />
+
+    <EditText
+        android:id="@+id/cajaApellidos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/cajaNombre"
+        android:layout_alignTop="@+id/labelApellidos"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/labelEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Email:"
+        android:layout_below="@+id/cajaApellidos"
+        android:layout_alignStart="@+id/labelApellidos" />
+
+    <EditText
+        android:id="@+id/cajaEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:layout_alignTop="@+id/labelEmail"
+        android:layout_alignStart="@+id/cajaApellidos" />
+
+    <TextView
+        android:id="@+id/labelDireccion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/labelEmail"
+        android:layout_below="@+id/cajaEmail"
+        android:layout_marginTop="27dp"
+        android:text="Dirección:" />
+
+    <EditText
+        android:id="@+id/cajaDireccion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/cajaEmail"
+        android:layout_alignTop="@+id/labelDireccion"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/btnVolver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/labelDireccion"
+        android:layout_below="@+id/cajaDireccion"
+        android:layout_marginTop="53dp"
+        android:text="Volver" />
+
+    <Button
+        android:id="@+id/btnInsertar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/btnVolver"
+        android:layout_alignStart="@+id/cajaDireccion"
+        android:text="Insertar"
+        android:layout_alignEnd="@+id/cajaDireccion" />
+
+</RelativeLayout>

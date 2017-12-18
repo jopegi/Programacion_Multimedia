@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">QuickTrade</string>
+
+    <!--Nodos FireBase-->
+    <string name="nodo_usuarios">usuarios</string>
+
+    <!--Campos de los nodos-->
+    <string name="campo_nick">nick</string>
+    <string name="campo_nombre">nombre</string>
+    <string name="campo_apellidos">apellidos</string>
+    <string name="campo_email">email</string>
+    <string name="campo_direccion">direccion</string>
+
 </resources>
