@@ -9,18 +9,19 @@ public class Usuario {
     private String nick;
     private String nombre;
     private String apellidos;
-    private String direccion;
     private String email;
+    private String direccion;
 
-    public Usuario(String nick, String nombre, String apellidos, String direccion, String email) {
+    public Usuario() {
+
+    }
+
+    public Usuario(String nick, String nombre, String apellidos, String email, String direccion) {
         this.nick = nick;
         this.nombre = nombre;
         this.apellidos = apellidos;
-        this.direccion = direccion;
         this.email = email;
-    }
-
-    public Usuario() {
+        this.direccion = direccion;
     }
 
     public String getNick() {
@@ -47,14 +48,6 @@ public class Usuario {
         this.apellidos = apellidos;
     }
 
-    public String getDireccion() {
-        return direccion;
-    }
-
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -63,14 +56,11 @@ public class Usuario {
         this.email = email;
     }
 
-    @Override
-    public String toString() {
-        return "Usuario{" +
-                "nick='" + nick + '\'' +
-                ", nombre='" + nombre + '\'' +
-                ", apellidos='" + apellidos + '\'' +
-                ", direccion='" + direccion + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 }
