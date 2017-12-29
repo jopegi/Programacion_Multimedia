@@ -11,4 +11,7 @@
     <string name="campo_email">email</string>
     <string name="campo_direccion">direccion</string>
 
+    <!--Label activity_mostrar.xml-->
+    <string name="labelTitulo">LISTADO DE NOMBRES DE USUARIO</string>
+
 </resources>

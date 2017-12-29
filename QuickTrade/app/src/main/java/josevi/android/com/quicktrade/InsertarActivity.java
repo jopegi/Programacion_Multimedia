@@ -36,7 +36,7 @@ public class InsertarActivity extends AppCompatActivity {
 
         //PASO1-FIREBASE. Obtenemos la referencia con la nuestra Base de Datos FireBase. Indicamos el nodo que
         //nos interesa referenciar, en este caso, usuarios.
-        referenciaBaseDatos = FirebaseDatabase.getInstance().getReference("usuarios");
+        referenciaBaseDatos = FirebaseDatabase.getInstance().getReference(getString(R.string.nodo_usuarios));
 
         //Instanciamos los views de la vista
         cajaNick = (TextView) findViewById(R.id.cajaNick);
