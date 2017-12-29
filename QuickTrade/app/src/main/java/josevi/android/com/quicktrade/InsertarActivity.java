@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,7 +13,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -52,34 +50,7 @@ public class InsertarActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                //ArrayAdapter<String> adaptor;
                 listadoNicks = new ArrayList<String>();
-
-                /*Query q = referenciaBaseDatos.orderByChild("nick").equalTo("Loco3");
-                q.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-
-                        int cont = 0;
-                        for (DataSnapshot i: dataSnapshot.getChildren()){
-
-                            cont++;
-                            Usuario usu = dataSnapshot.getValue(Usuario.class);
-                            Toast.makeText(InsertarActivity.this, "Nick size: "+cont, Toast.LENGTH_SHORT).show();
-                            Toast.makeText(InsertarActivity.this, "Nick values: "+usu, Toast.LENGTH_SHORT).show();
-                           // String nickUsuario = usu.getNick();
-                            //Toast.makeText(InsertarActivity.this, "Nick size: "+usu, Toast.LENGTH_SHORT).show();
-                            //listadoNicks.add(nickUsuario);
-
-                        }
-
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });*/
 
                 for (DataSnapshot i: dataSnapshot.getChildren()){
 
