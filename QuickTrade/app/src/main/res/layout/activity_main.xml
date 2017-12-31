@@ -28,15 +28,15 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="85dp"
         android:padding="10dp"
-        android:text="Insertar usuarios" />
+        android:text="Insertar datos usuario" />
 
     <Button
         android:id="@+id/btnMostrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/btnInsertar"
-        android:layout_below="@+id/btnInsertar"
-        android:layout_marginTop="25dp"
+        android:layout_below="@+id/btnModificar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="29dp"
         android:padding="10dp"
         android:text="Mostrar Usuarios" />
 
@@ -44,9 +44,19 @@
         android:id="@+id/btnModificar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/btnMostrar"
+
+        android:layout_below="@+id/btnInsertar"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
         android:padding="10dp"
-        android:text="Modificar usuarios" />
+        android:text="Modificar datos usuario" />
+
+    <Button
+        android:id="@+id/btnProductos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnMostrar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:text="Productos" />
 </RelativeLayout>
