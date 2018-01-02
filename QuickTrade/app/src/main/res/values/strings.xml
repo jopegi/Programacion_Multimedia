@@ -3,6 +3,7 @@
 
     <!--Nodos FireBase-->
     <string name="nodo_usuarios">usuarios</string>
+    <string name="nodo_productos">productos</string>
 
     <!--Campos de los nodos-->
     <string name="campo_nick">nick</string>
