@@ -1,5 +1,6 @@
 package josevi.android.com.quicktrade;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,10 +19,21 @@ import java.util.ArrayList;
 
 public class MostrarEnVentaActivity extends AppCompatActivity {
 
+    private String uidUsuario;
+    private String nickUsuario;
+
+    private Producto prod;
+
     private ListView listaProductosEnVenta;
     private Button botonVolver;
 
     DatabaseReference referencia;
+
+    private ArrayList<Producto> listadoProductos;
+
+    private ArrayList<String> listaProductos;
+
+    private ArrayAdapter<String> adaptador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,19 +43,19 @@ public class MostrarEnVentaActivity extends AppCompatActivity {
         listaProductosEnVenta = (ListView) findViewById(R.id.listaProductos);
         botonVolver = (Button) findViewById(R.id.btnVolver);
 
-        //PASO1-FIREBASE. Obtenemos la referencia con la nuestra Base de Datos FireBase. Indicamos el nodo que
-        //nos interesa referenciar, en este caso, usuarios.
-        referencia = FirebaseDatabase.getInstance().getReference("productos");
+        Intent intentMostrarEnVenta = getIntent();
 
-        Query q = referencia;
+        uidUsuario = intentMostrarEnVenta.getStringExtra("Uid");
+
+        referencia = FirebaseDatabase.getInstance().getReference(getString(R.string.nodo_productos));
+
+        Query q = referencia.orderByChild("uid").equalTo(uidUsuario);
 
         q.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                ArrayAdapter<String> adaptador;
-
-                ArrayList<Producto> listadoProductos = new ArrayList<Producto>();
+                listadoProductos = new ArrayList<Producto>();
 
                 for (DataSnapshot i: dataSnapshot.getChildren()){
 
@@ -53,7 +65,7 @@ public class MostrarEnVentaActivity extends AppCompatActivity {
 
                 }
 
-                ArrayList<String> listaProductos = new ArrayList<String>();
+                listaProductos = new ArrayList<String>();
 
                 for (int i = 0; i<listadoProductos.size(); i++){
 

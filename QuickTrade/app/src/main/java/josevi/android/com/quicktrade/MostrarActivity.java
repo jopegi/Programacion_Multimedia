@@ -26,6 +26,10 @@ public class MostrarActivity extends AppCompatActivity {
     //Objeto que hará referencia a la BBDD FireBase
     DatabaseReference referenciaBaseDatos;
 
+    private ArrayAdapter<String> adaptador;
+
+    private ArrayList<String> listadoNicks;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,15 +42,14 @@ public class MostrarActivity extends AppCompatActivity {
         //nos interesa referenciar, en este caso, usuarios.
         referenciaBaseDatos = FirebaseDatabase.getInstance().getReference(getString(R.string.nodo_usuarios));
 
+        //En la Query nos quedamos con todos los usuarios que contengan un atributo llamado "nick"
         Query q = referenciaBaseDatos.orderByChild(getString(R.string.campo_nick));
 
                 q.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
-                        ArrayAdapter<String> adaptador;
-
-                        ArrayList<String> listadoNicks = new ArrayList<String>();
+                        listadoNicks = new ArrayList<String>();
 
                         for (DataSnapshot i: dataSnapshot.getChildren()){
 

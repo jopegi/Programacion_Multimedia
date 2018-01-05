@@ -21,16 +21,6 @@
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/btnInsertar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textViewTituloApp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="85dp"
-        android:padding="10dp"
-        android:text="Insertar datos usuario" />
-
-    <Button
         android:id="@+id/btnMostrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -45,9 +35,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_below="@+id/btnInsertar"
+        android:layout_below="@+id/textViewTituloApp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="73dp"
         android:padding="10dp"
         android:text="Modificar datos usuario" />
 

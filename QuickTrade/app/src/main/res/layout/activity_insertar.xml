@@ -63,38 +63,19 @@
         android:inputType="textPersonName" />
 
     <TextView
-        android:id="@+id/labelEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Email:"
-        android:layout_below="@+id/cajaApellidos"
-        android:layout_alignStart="@+id/labelApellidos" />
-
-    <EditText
-        android:id="@+id/cajaEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:layout_alignTop="@+id/labelEmail"
-        android:layout_alignStart="@+id/cajaApellidos" />
-
-    <TextView
         android:id="@+id/labelDireccion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/labelEmail"
-        android:layout_below="@+id/cajaEmail"
-        android:layout_marginTop="27dp"
+        android:layout_alignEnd="@+id/labelApellidos"
+        android:layout_alignTop="@+id/cajaDireccion"
         android:text="Dirección:" />
 
     <EditText
         android:id="@+id/cajaDireccion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/cajaEmail"
-        android:layout_alignTop="@+id/labelDireccion"
+        android:layout_alignStart="@+id/cajaApellidos"
+        android:layout_centerVertical="true"
         android:ems="10"
         android:inputType="textPersonName" />
 

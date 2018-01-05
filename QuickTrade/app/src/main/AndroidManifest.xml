@@ -33,7 +33,9 @@
         <!-- <activity android:name=".RegistrarActivity"></activity> -->
         <activity android:name=".GestorProductosActivity" />
         <activity android:name=".MostrarEnVentaActivity" />
-        <activity android:name=".MostrarPorCategoriaActivity"></activity>
+        <activity android:name=".MostrarPorCategoriaActivity" />
+        <activity android:name=".ModificarProductoActivity" />
+        <activity android:name=".BorrarProductoActivity"></activity>
     </application>
 
 </manifest>

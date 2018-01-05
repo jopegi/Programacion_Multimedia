@@ -21,6 +21,7 @@ public class Producto implements Serializable{
     public Producto() {
     }
 
+    /*
     //Constructor parámetros
     public Producto(String usuario, String nombre, String descripcion, String categoria, Double precio) {
         this.usuario = usuario;
@@ -29,7 +30,7 @@ public class Producto implements Serializable{
         this.categoria = categoria;
         this.precio = precio;
     }
-
+    */
 
     //Constructor parámetros
     public Producto(String usuario, String nombre, String descripcion, String categoria, Double precio, String uid) {

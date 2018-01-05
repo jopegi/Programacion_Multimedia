@@ -19,13 +19,13 @@ import java.util.ArrayList;
 
 public class InsertarActivity extends AppCompatActivity {
 
-    private TextView cajaNick, cajaNombre, cajaApellidos, cajaEmail, cajaDireccion;
+    private TextView cajaNick, cajaNombre, cajaApellidos, cajaDireccion;
     private Button botonVolver, botonInsertar;
 
     //Objeto que hará referencia a la BBDD FireBase
     DatabaseReference referenciaBaseDatos;
 
-    ArrayList<String> listadoNicks;
+    private ArrayList<String> listadoNicks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +40,14 @@ public class InsertarActivity extends AppCompatActivity {
         cajaNick = (TextView) findViewById(R.id.cajaNick);
         cajaNombre = (TextView) findViewById(R.id.cajaNombre);
         cajaApellidos = (TextView) findViewById(R.id.cajaApellidos);
-        cajaEmail = (TextView) findViewById(R.id.cajaEmail);
         cajaDireccion = (TextView) findViewById(R.id.cajaDireccion);
+        /*
+        No incluimos un TextView para el email porque al este ir asociado al registro de autentificación de
+        FireBase no es lógico que este sea diferente en los datos personales del usuario
+         */
         botonVolver = (Button) findViewById(R.id.btnVolver);
         botonInsertar = (Button) findViewById(R.id.btnInsertar);
+
 
         //****************ESCUCHARÁ CUALQUIER CAMBIO EN EL NODO usuarios DE LA BBDD***********
         referenciaBaseDatos.addValueEventListener(new ValueEventListener() {
@@ -57,10 +61,7 @@ public class InsertarActivity extends AppCompatActivity {
                     Usuario usu = i.getValue(Usuario.class);
                     String nickUsuario = usu.getNick();
                     listadoNicks.add(nickUsuario);
-                    //Toast.makeText(InsertarActivity.this, "Nick size: "+usu.getNombre(), Toast.LENGTH_SHORT).show();
-
                 }
-                //Toast.makeText(InsertarActivity.this, "Nick size: "+cont, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -70,13 +71,13 @@ public class InsertarActivity extends AppCompatActivity {
         });
         //**********************************************************************
 
+
         //Evento del botón Volver
         botonVolver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intentVolver = new Intent(InsertarActivity.this, MainActivity.class);
-                startActivity(intentVolver);
+            finish();
 
             }
         });
@@ -89,7 +90,14 @@ public class InsertarActivity extends AppCompatActivity {
                 String nick = cajaNick.getText().toString();
                 String nombre = cajaNombre.getText().toString();
                 String apellidos = cajaApellidos.getText().toString();
-                String email = cajaEmail.getText().toString();
+
+                //Hacemos accesible el intento que envía la actividad RegistarActivity;
+                Intent intentoLoginOk = getIntent();
+                //Recogemos el email enviado desde la actividad anterior
+                String email = intentoLoginOk.getStringExtra("email");
+                //Recogemos el uid enviado desde la actividad anterior
+                String Uid_usuario_logeado = intentoLoginOk.getStringExtra("Uid");
+
                 String direccion = cajaDireccion.getText().toString();
 
                 //Si la caja para el nick está vacía...
@@ -101,34 +109,33 @@ public class InsertarActivity extends AppCompatActivity {
                     //Si la caja para los apellidos está vacía...
                 } else if (TextUtils.isEmpty(apellidos) == true) {
                     Toast.makeText(InsertarActivity.this, "Por favor, rellene el campo apellidos", Toast.LENGTH_SHORT).show();
-                    //Si la caja para el email está vacía...
-                } else if (TextUtils.isEmpty(email) == true) {
-                    Toast.makeText(InsertarActivity.this, "Por favor, rellene el campo email", Toast.LENGTH_SHORT).show();
                     //Si la caja para la dirección está vacía...
                 } else if (TextUtils.isEmpty(direccion) == true) {
                     Toast.makeText(InsertarActivity.this, "Por favor, rellene el campo direccion", Toast.LENGTH_SHORT).show();
                     //Si las cajas para los atributos se han rellenado correctamente...
-                    // Comprobamos si el nick a insertar existe previamente en Firebase
                 } else {
 
                     //Si no existe...
                     if (!existeNick(nick)) {
 
                         //Creamos un nuevo usuario
-                        Usuario usu = new Usuario(nick, nombre, apellidos, email, direccion);
+                        Usuario usu = new Usuario(Uid_usuario_logeado, nick, nombre, apellidos, email, direccion);
 
                         //PASO2-FIREBASE. Creamos un nuevo nodo usuario (mediante una clave)
-                        String claveNodoUsuarios = referenciaBaseDatos.push().getKey();
+                        //String claveNodoUsuarios = referenciaBaseDatos.push().getKey();
+                        String claveNodoUsuarios = intentoLoginOk.getStringExtra("Uid");
 
-                        //PASO3-FIREBASE. Añadimos el nuevo usuario dentro del correspondiente nodo
+                        //PASO3-FIREBASE. Añadimos el nuevo usuario dentro del correspondiente nodo, el cual decidimos
+                        //identificar con la clave de Uid generada en la autentificación del usuario en Firebase
                         referenciaBaseDatos.child(claveNodoUsuarios).setValue(usu);
 
                         //Reseteamos las cajas de texto
                         cajaNick.setText("");
                         cajaNombre.setText("");
                         cajaApellidos.setText("");
-                        cajaEmail.setText("");
                         cajaDireccion.setText("");
+
+                        Toast.makeText(InsertarActivity.this, "Inserción realizada con éxito!!", Toast.LENGTH_SHORT).show();
 
 
                         //Si existe...
@@ -136,10 +143,12 @@ public class InsertarActivity extends AppCompatActivity {
 
                         Toast.makeText(InsertarActivity.this, "El nick que ha elegido ya existe!! Por favor, elija otro nick", Toast.LENGTH_SHORT).show();
                     }
+
                 }
             }
         });
     }
+
 
     //Método para comparar el nuevo nick con los ya existentes en FireBase
     public boolean existeNick (String nuevoNick){

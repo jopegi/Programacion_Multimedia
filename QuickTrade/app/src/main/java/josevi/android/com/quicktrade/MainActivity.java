@@ -9,7 +9,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button botonInsertar, botonMostrar, botonModificar, botonProductos;
+    private Button botonMostrar, botonModificar, botonProductos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,21 +17,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //Instanciamos los botones de la vista
-        botonInsertar = (Button) findViewById(R.id.btnInsertar);
         botonModificar = (Button) findViewById(R.id.btnModificar);
         botonMostrar = (Button) findViewById(R.id.btnMostrar);
         botonProductos = (Button) findViewById(R.id.btnProductos);
-
-        //Evento del botón Insertar
-        botonInsertar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intentInsertar = new Intent(MainActivity.this, InsertarActivity.class);
-                startActivity(intentInsertar);
-
-            }
-        });
 
         //Evento del botón Mostrar
         botonMostrar.setOnClickListener(new View.OnClickListener() {
@@ -49,7 +37,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                //Obtenemos una referencia del intent que proviene del RegistarActivity
+                Intent intentMain = getIntent();
+
+                //Obtenemos el valor del Uid enviado mediante el mencionado intent
+                String UserUid = intentMain.getStringExtra("Uid");
+
                 Intent intentModificar = new Intent(MainActivity.this, ModificarActivity.class);
+
+                //Volvemos a pasar el valor del Uid a la nueva actividad del intent
+                intentModificar.putExtra("Uid", UserUid);
+
                 startActivity(intentModificar);
 
             }
@@ -66,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 //Obtenemos el valor del Uid enviado mediante el mencionado intent
                 String UserUid = intentoLoginOk.getStringExtra("Uid");
 
-                //Creamos un nuevo intent para pasar a la actividad GestorProductosActivity
+               //Creamos un nuevo intent para pasar a la actividad GestorProductosActivity
                 Intent intentProductos = new Intent(MainActivity.this, GestorProductosActivity.class);
 
                 //Volvemos a pasar el valor del Uid a la nueva actividad del intent

@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -27,8 +28,10 @@ public class GestorProductosActivity extends AppCompatActivity {
     private EditText cajaDescripcion;
     private EditText cajaPrecio;
 
+    //Labels
+    private TextView labelNick;
+
     //Spinner
-    private Spinner spinnerUsuario;
     private Spinner spinnerCategoria;
 
     //Botones
@@ -38,11 +41,23 @@ public class GestorProductosActivity extends AppCompatActivity {
     private Button botonMostrarEnVenta;
     private Button botonMostrarCategoria;
 
-    private ArrayList<String> listadoNicks;             //ArrayList para los nicks de usuario
     private ArrayList<String> listadoNombreProductos;   //ArrayList para los nombres de producto
 
-    DatabaseReference dbr;      //Referencia que se utilizará para el nodo "usuarios"
-    DatabaseReference dbr2;     //Referencia que se utilizará para el nodo "productos"
+    private ArrayList<Producto> listadoProductos;   //ArrayList para los objetos producto
+
+    private ArrayList<String> listadoNicks;     //ArrayList para los nicks de usuario
+
+    DatabaseReference referenciaBaseDatos;      //Referencia que se utilizará para el nodo "usuarios"
+    DatabaseReference referenciaBaseDatos2;     //Referencia que se utilizará para el nodo "productos"
+    DatabaseReference referenciaBaseDatos3;
+
+    private ArrayAdapter<String> adaptador;
+
+    private Usuario usu;
+
+    private String userUid;
+
+    private String nickName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,8 +69,10 @@ public class GestorProductosActivity extends AppCompatActivity {
         cajaDescripcion = (EditText) findViewById(R.id.editTextDescripcion);
         cajaPrecio = (EditText) findViewById(R.id.editTextPrecio);
 
+        //Label de texto de la interfaz
+        labelNick = (TextView) findViewById(R.id.textViewNick);
+
         //Spinner de la interfaz
-        spinnerUsuario = (Spinner) findViewById(R.id.spinnerNick);
         spinnerCategoria = (Spinner) findViewById(R.id.spinnerCategoria);
 
         //Botones de la interfaz
@@ -74,69 +91,30 @@ public class GestorProductosActivity extends AppCompatActivity {
         //Rellenamos el spinner con el adaptador
         spinnerCategoria.setAdapter(adaptadorCategorias);
 
-        //Obtenemos una referencia al nodo "usuarios"
-        dbr = FirebaseDatabase.getInstance().getReference(getString(R.string.nodo_usuarios));
+        //Obtenemos una referencia del intent que proviene del RegistarActivity
+        Intent intentProductos = getIntent();
 
-        //Definimos un listener que se encargará de suscribirse a nuestra referencia a FireBase
-        //y de estar pendiente de ante cualquier cambio que se produzca en el nodo actual...
-        dbr.addValueEventListener(new ValueEventListener() {
+        //Obtenemos el valor del Uid enviado mediante el mencionado intent
+        userUid = intentProductos.getStringExtra("Uid");
 
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                //Declaramos un ArrayAdapter
-                ArrayAdapter<String> adaptadorUsuarios;
-
-                //Instanciamos un ArrayList para los usuarios
-                listadoNicks = new ArrayList<String>();
-
-                for (DataSnapshot i: dataSnapshot.getChildren()){
-
-                    //Vamos recorriendo el Snapshot y guardando los nicks de usuario
-                    //en un ArrayList que, posteriormente se cargará en un adaptador
-                    //para poder mostrarse en un Spinner
-                    Usuario usu = i.getValue(Usuario.class);
-                    String nickUsuario = usu.getNick();
-                    listadoNicks.add(nickUsuario);
-
-                }
-
-                //Instanciamos el ArrayAdapter pasándole la lista con los nicks de los usuarios
-                adaptadorUsuarios = new ArrayAdapter<String>(GestorProductosActivity.this, android.R.layout.simple_list_item_1, listadoNicks);
-                //Rellenamos el spinner con el adaptador
-                spinnerUsuario.setAdapter(adaptadorUsuarios);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
+        //Obtenemos una referencia al nodo "usuarios/Uid"
+        referenciaBaseDatos = FirebaseDatabase.getInstance().getReference(getString(R.string.nodo_usuarios)).child(userUid);
 
         //Obtenemos una referencia al nodo "productos"
-        dbr2 = FirebaseDatabase.getInstance().getReference(getString(R.string.nodo_productos));
+        referenciaBaseDatos2 = FirebaseDatabase.getInstance().getReference(getString(R.string.nodo_productos));
 
-        //Definimos un listener que se encargará de suscribirse a nuestra referencia a FireBase
-        //y de estar pendiente de ante cualquier cambio que se produzca en el nodo actual...
-        dbr2.addValueEventListener(new ValueEventListener() {
-
+        //****************ESCUCHARÁ CUALQUIER CAMBIO EN EL NODO usuarios DE LA BBDD***********
+        referenciaBaseDatos.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                //Instanciamos un ArrayList para los productos
-                listadoNombreProductos = new ArrayList<String>();
+                //Como la referencia a la BBDD apunta a un nodo en concreto (aquel que coincide
+                //con el Uid del usuario logeado) no hace falta hacer uso de un bucle for para
+                //recorrerlo
+                usu = dataSnapshot.getValue(Usuario.class);
 
-                for (DataSnapshot j: dataSnapshot.getChildren()){
+                labelNick.setText(usu.getNick());
 
-                    //Vamos recorriendo el Snapshot y guardando los nombres de los
-                    //productos en un ArrayList. Y, este Arraylist servirá para
-                    //comprobar, posteriormente, si el producto existe en la Base
-                    //de Datos cuando se necesite su modificación
-                    Producto prod = j.getValue(Producto.class);
-                    String nombreProducto = prod.getNombre();
-                    listadoNombreProductos.add(nombreProducto);
-                }
             }
 
             @Override
@@ -144,7 +122,6 @@ public class GestorProductosActivity extends AppCompatActivity {
 
             }
         });
-
 
 
         //**********BOTÓN PARA INSERTAR UN NUEVO PRODUCTO**********************
@@ -152,19 +129,12 @@ public class GestorProductosActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-               //Obtenemos una referencia del intent que proviene del RegistarActivity
-                Intent intentProductos = getIntent();
-
-                //Obtenemos el valor del Uid enviado mediante el mencionado intent
-                String userUid = intentProductos.getStringExtra("Uid");
-                //Toast.makeText(GestorProductosActivity.this, "Este es el Usid pasado en el intent: "+userUid, Toast.LENGTH_SHORT).show();
-
                 //Recogemos los valores de las cajas de texto de la interfaz gráfica
                 String nombre = cajaNombre.getText().toString();
                 String descripcion = cajaDescripcion.getText().toString();
                 String precio =  cajaPrecio.getText().toString();
                 String categoria = spinnerCategoria.getSelectedItem().toString();
-                String nickUsuario = spinnerUsuario.getSelectedItem().toString();
+                String nickUsuario = labelNick.getText().toString();
 
                 //Validamos que las caja de texto esten llenas
                 if(!TextUtils.isEmpty(nombre)){
@@ -186,10 +156,10 @@ public class GestorProductosActivity extends AppCompatActivity {
                                     Toast.makeText(GestorProductosActivity.this, "producto creado!!", Toast.LENGTH_SHORT).show();
 
                                     //Obtenemos la clave de Firebase que apunta al nodo "productos"
-                                    String clave = dbr2.push().getKey();
+                                    String clave = referenciaBaseDatos2.push().getKey();
 
                                     //Generamos un nuevo producto con la referencia de dicha clave
-                                    dbr2.child(clave).setValue(p);
+                                   referenciaBaseDatos2.child(clave).setValue(p);
 
                                 }else{
 
@@ -227,79 +197,7 @@ public class GestorProductosActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String nombre = cajaNombre.getText().toString();
-               // Toast.makeText(GestorProductosActivity.this, ""+nombre, Toast.LENGTH_SHORT).show();
-              //  Toast.makeText(GestorProductosActivity.this, ""+listadoNombreProductos.get(0), Toast.LENGTH_SHORT).show();
-
-                /*
-
-                //Obtenemos una referencia del intent que proviene del RegistarActivity
-                Intent intentProductos = getIntent();
-
-                //Obtenemos el valor del Uid enviado mediante el mencionado intent
-                String userUid = intentProductos.getStringExtra("Uid");
-
-                */
-
-                //Validamos que la caja con el nombre del producto esté llena
-                if(!TextUtils.isEmpty(nombre)){
-
-                    if(existeProducto(nombre)) {
-
-                        //Nos quedamos con los nodos cuyo atributo nombre coincida con el especificado en la interfaz gráfica
-                        Query q = dbr2.orderByChild(getString(R.string.campo_nombre)).equalTo(nombre);
-
-                        //Definimos un listener
-                        q.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                                for (DataSnapshot i : dataSnapshot.getChildren()) {
-
-                                    //Obtenemos la clave que identifica al nodo anterior
-                                    String clave = i.getKey();
-
-                                    //Damos nuevos valores a los atributos de nuestro nodo, validando
-                                    //únicamente aquellas cajas de texto que no estén vacías
-
-                                    if (!TextUtils.isEmpty(cajaDescripcion.getText().toString())) {
-
-                                        dbr2.child(clave).child("descripción").setValue(cajaDescripcion.getText().toString());
-                                    }
-
-                                    if (!TextUtils.isEmpty(spinnerCategoria.getSelectedItem().toString())) {
-
-                                        dbr2.child(clave).child("categoria").setValue(spinnerCategoria.getSelectedItem().toString());
-                                    }
-
-                                    if (isNumber(cajaPrecio.getText().toString()) && !TextUtils.isEmpty(cajaPrecio.getText().toString())) {
-
-                                        dbr2.child(clave).child("precio").setValue(Double.parseDouble(cajaPrecio.getText().toString()));
-                                    }
-
-                                }
-
-                                Toast.makeText(GestorProductosActivity.this, "Producto modificado con éxito!!", Toast.LENGTH_SHORT).show();
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
-                            }
-                        });
-
-                    }else{
-
-                        Toast.makeText(GestorProductosActivity.this, "El producto que intenta modificar no existe!!",
-                                Toast.LENGTH_SHORT).show();
-                    }
-
-                }else{
-
-                    Toast.makeText(GestorProductosActivity.this, "Debe de indicar el nombre del producto que desea modificar!!",
-                            Toast.LENGTH_SHORT).show();
-                }
-
+                listarProductos();
 
             }
         });
@@ -310,64 +208,13 @@ public class GestorProductosActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Toast.makeText(GestorProductosActivity.this, ""+listadoNombreProductos.get(1), Toast.LENGTH_SHORT).show();
+                Intent intentoBorrarProducto = new Intent(GestorProductosActivity.this, BorrarProductoActivity.class);
 
-                String nombre = cajaNombre.getText().toString();
+                intentoBorrarProducto.putExtra("Uid", userUid);
 
-                /*
+                intentoBorrarProducto.putExtra("Nick", nickName);
 
-                //Obtenemos una referencia del intent que proviene del RegistarActivity
-                Intent intentProductos = getIntent();
-
-                //Obtenemos el valor del Uid enviado mediante el mencionado intent
-                String userUid = intentProductos.getStringExtra("Uid");
-
-                */
-
-                //Validamos que la caja con el nombre del producto esté llena
-                if(!TextUtils.isEmpty(nombre)){
-
-                    if(existeProducto(nombre) == true) {
-
-                        //Nos quedamos con los nodos cuyo atributo nombre coincida con el especificado en la interfaz gráfica
-                        Query q = dbr2.orderByChild(getString(R.string.campo_nombre)).equalTo(nombre);
-
-                        //Definimos un listener
-                        q.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                                for (DataSnapshot i : dataSnapshot.getChildren()) {
-
-                                    //Obtenemos la clave que identifica al nodo anterior
-                                    String clave = i.getKey();
-
-                                    dbr2.child(clave).removeValue();
-
-                                }
-
-                                Toast.makeText(GestorProductosActivity.this, "Producto eliminado con éxito!!", Toast.LENGTH_SHORT).show();
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
-                            }
-                        });
-
-                    }else{
-
-                        Toast.makeText(GestorProductosActivity.this, "El producto que intenta modificar no existe!!",
-                                Toast.LENGTH_SHORT).show();
-                    }
-
-                }else{
-
-                    Toast.makeText(GestorProductosActivity.this, "Debe de indicar el nombre del producto que desea modificar!!",
-                            Toast.LENGTH_SHORT).show();
-                }
-
-
+                startActivity(intentoBorrarProducto);
             }
         });
 
@@ -376,6 +223,11 @@ public class GestorProductosActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intentMostrarEnVenta = new Intent(GestorProductosActivity.this, MostrarEnVentaActivity.class);
+
+                intentMostrarEnVenta.putExtra("Uid", userUid);
+
+                intentMostrarEnVenta.putExtra("Nick", nickName);
+
                 startActivity(intentMostrarEnVenta);
 
             }
@@ -386,7 +238,13 @@ public class GestorProductosActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 Intent intentMostrarPorCategoria = new Intent(GestorProductosActivity.this, MostrarPorCategoriaActivity.class);
-                intentMostrarPorCategoria.putExtra("categoria", spinnerCategoria.getSelectedItem().toString());
+
+                intentMostrarPorCategoria.putExtra("Categoria", spinnerCategoria.getSelectedItem().toString());
+
+                intentMostrarPorCategoria.putExtra("Uid", userUid);
+
+                intentMostrarPorCategoria.putExtra("Nick", nickName);
+
                 startActivity(intentMostrarPorCategoria);
 
             }
@@ -438,6 +296,72 @@ public class GestorProductosActivity extends AppCompatActivity {
     }
 
 
+    public ArrayList<Producto> listarProductos(){
+
+        listadoProductos = new ArrayList<Producto>();
+
+        Query q2 = referenciaBaseDatos2.orderByChild("uid").equalTo(userUid);
+
+        //****************ESCUCHARÁ CUALQUIER CAMBIO EN EL NODO usuarios DE LA BBDD***********
+        q2.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                int cont=0;
+
+                for (DataSnapshot i: dataSnapshot.getChildren()){
+
+                    cont++;
+
+                    Producto prod = i.getValue(Producto.class);
+
+                    listadoProductos.add(prod);
+
+                }
+
+                if (listadoProductos.size()>0) {
+
+                    referenciaBaseDatos3 = FirebaseDatabase.getInstance().getReference(getString(R.string.nodo_usuarios)).child(userUid);
+
+                    //****************ESCUCHARÁ CUALQUIER CAMBIO EN EL NODO usuarios DE LA BBDD***********
+                    referenciaBaseDatos3.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+
+                            usu = dataSnapshot.getValue(Usuario.class);
+                            nickName = usu.getNick();
+
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
+                    Intent intentoModificarProducto = new Intent(GestorProductosActivity.this, ModificarProductoActivity.class);
+
+                    intentoModificarProducto.putExtra("Uid", userUid);
+
+                    intentoModificarProducto.putExtra("Nick", nickName);
+
+                    startActivity(intentoModificarProducto);
+
+                }else{
+
+                    Toast.makeText(GestorProductosActivity.this, "Todavía no tiene ningún producto registrado!!", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        return listadoProductos;
+    }
 
 
 }

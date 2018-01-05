@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="4dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Descripción"
@@ -58,25 +58,12 @@
         app:layout_constraintTop_toBottomOf="@+id/spinnerCategoria" />
 
     <Spinner
-        android:id="@+id/spinnerNick"
-        android:layout_width="0dp"
-        android:layout_height="26dp"
-        android:layout_marginBottom="32dp"
-        android:layout_marginEnd="17dp"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="31dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewMostrarProductos"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textViewUsuario" />
-
-    <Spinner
         android:id="@+id/spinnerCategoria"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="17dp"
         android:layout_marginStart="17dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="3dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewCategoria" />
@@ -91,32 +78,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextDescripcion" />
 
-    <TextView
-        android:id="@+id/textViewUsuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:text="Usuario (nick)"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPrecio" />
-
     <Button
         android:id="@+id/btnAltaProducto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="11dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="9dp"
         android:text="Alta Producto"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerNick" />
+        app:layout_constraintBottom_toTopOf="@+id/btnModificarProducto"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnModificarProducto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Modificar Procucto"
+        android:text="Modificar Producto"
         app:layout_constraintBottom_toBottomOf="@+id/btnMostrarProductos"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnMostrarProductos" />
@@ -164,8 +141,22 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="6dp"
+        android:layout_marginBottom="5dp"
         android:text="Productos por categoría"
         app:layout_constraintBottom_toTopOf="@+id/btnMostrarCategorias"
         app:layout_constraintStart_toStartOf="@+id/btnMostrarCategorias" />
+
+    <TextView
+        android:id="@+id/textViewNick"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="12dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
+        android:text="Nick"
+        android:textAlignment="textStart"
+        android:textColor="@android:color/holo_red_dark"
+        app:layout_constraintEnd_toEndOf="@+id/textViewMostrarProductos"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextPrecio" />
 </android.support.constraint.ConstraintLayout>

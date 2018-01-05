@@ -19,12 +19,20 @@ import java.util.ArrayList;
 
 public class MostrarPorCategoriaActivity extends AppCompatActivity {
 
+    private String uidUsuario;
+    private String nickUsuario;
+    private String categoriaSeleccionada;
+
     private ListView listaProductosPorCategoria;
     private Button botonVolver;
 
     DatabaseReference referencia;
 
-    private ArrayList<String> listadoCategorias;             //ArrayList para los nicks de usuario
+    private ArrayList<String> listaProductos;
+    private ArrayList<Producto> productosXCategoria;
+    private ArrayAdapter<String> adaptador;
+
+    private Producto prod;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,69 +42,34 @@ public class MostrarPorCategoriaActivity extends AppCompatActivity {
         listaProductosPorCategoria = (ListView) findViewById(R.id.listaProductos);
         botonVolver = (Button) findViewById(R.id.btnVolver);
 
-        //PASO1-FIREBASE. Obtenemos la referencia con la nuestra Base de Datos FireBase. Indicamos el nodo que
-        //nos interesa referenciar, en este caso, productos.
+        Intent intentMostrarPorCategoria= getIntent();
+        uidUsuario = intentMostrarPorCategoria.getStringExtra("Uid");
+        nickUsuario = intentMostrarPorCategoria.getStringExtra("Nick");
+        categoriaSeleccionada = intentMostrarPorCategoria.getStringExtra("Categoria");
+
         referencia = FirebaseDatabase.getInstance().getReference("productos");
-
-        //Definimos un listener que se encargará de suscribirse a nuestra referencia a FireBase
-        //y de estar pendiente de ante cualquier cambio que se produzca en el nodo actual...
-        referencia.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                //Declaramos un ArrayAdapter
-                ArrayAdapter<String> adaptador;
-
-                //Instanciamos un ArrayList para los usuarios
-                listadoCategorias = new ArrayList<String>();
-
-                for (DataSnapshot i: dataSnapshot.getChildren()){
-
-                    //Vamos recorriendo el Snapshot y guardando las categorias en un ArrayList
-                    Producto prod = i.getValue(Producto.class);
-                    String categoria = prod.getCategoria();
-                    listadoCategorias.add(categoria);
-
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        //Obtenemos una referencia del intent que proviene del GestorProductosActivity
-        Intent intentMostrarPorCategoria = getIntent();
-
-        //Obtenemos el valor de la categoría enviado mediante el intent
-        String categoriaSeleccionada = intentMostrarPorCategoria.getStringExtra("categoria");
-
 
         Query q = referencia.orderByChild("categoria").equalTo(categoriaSeleccionada);
 
-        q.addListenerForSingleValueEvent(new ValueEventListener() {
+        q.addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                ArrayAdapter<String> adaptador;
-
-                ArrayList<Producto> listadoProductosPorCategoria = new ArrayList<Producto>();
+                productosXCategoria = new ArrayList<Producto>();
 
                 for (DataSnapshot i: dataSnapshot.getChildren()){
 
                     Producto prod = i.getValue(Producto.class);
-
-                    listadoProductosPorCategoria.add(prod);
+                    productosXCategoria.add(prod);
 
                 }
 
-                ArrayList<String> listaProductos = new ArrayList<String>();
+                listaProductos = new ArrayList<String>();
 
-                for (int i = 0; i<listadoProductosPorCategoria.size(); i++){
+                for (int i = 0; i<productosXCategoria.size(); i++){
 
-                    String mensaje = listadoProductosPorCategoria.get(i).toString();
+                    String mensaje = productosXCategoria.get(i).toString();
 
                     listaProductos.add(mensaje);
 
@@ -114,8 +87,6 @@ public class MostrarPorCategoriaActivity extends AppCompatActivity {
         });
 
 
-
-
         botonVolver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,11 +96,12 @@ public class MostrarPorCategoriaActivity extends AppCompatActivity {
         });
     }
 
+    /*
     //Método para comprobar si una categoría existe
     public boolean existeCategoria (String nombreCategoria){
 
         //Al nuevo nick le eliminamos los posibles espacios en blanco
-        String nickTrim = nombreCategoria.trim();
+        String nickTrim = categoriaSeleccionada.trim();
 
         boolean rtn = false;
 
@@ -145,4 +117,5 @@ public class MostrarPorCategoriaActivity extends AppCompatActivity {
         }
         return rtn;
     }
+    */
 }

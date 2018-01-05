@@ -29,9 +29,6 @@ public class RegistrarActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,10 +81,32 @@ public class RegistrarActivity extends AppCompatActivity {
 
                             FirebaseUser user = mAuth.getCurrentUser();
 
-                            Toast.makeText(RegistrarActivity.this, "Register success."+"User: "+user.getUid(),
+                            Toast.makeText(RegistrarActivity.this, "Register successful."+"User: "+user.getUid(),
                                     Toast.LENGTH_SHORT).show();
 
                             mAuth.signOut();
+
+                            //Guardamos el Uid del usuario logeado en una variable
+                            String UidUsuario = user.getUid();
+
+                            //Guardamos el email insertado por el usuario registrado en una variable
+                            String email = cajaEmail.getText().toString();
+
+                            //Pasamos de la actividad de registro a la de insertar datos de usuario, así, a la
+                            //vez que se crea la autentificación de usuario, se crea un nuevo nodo usuario en
+                            //la DataBase de Firebase. Y, el nuevo nodo de usuario de la DataBase se identificará
+                            //con el Uid del usuario.
+                            Intent intentoLoginOk = new Intent(RegistrarActivity.this, InsertarActivity.class);
+
+                            //Pasamos el Uid del usuario al MainActivity  mediante el método putExtra
+                            //del intent
+                            intentoLoginOk.putExtra("Uid", UidUsuario);
+
+                            //Pasamos también a la siguiente actividad el email del usuario
+                            intentoLoginOk.putExtra("email", email);
+
+                            //Lanzamos en intent
+                            startActivity(intentoLoginOk);
 
                         } else {
 
@@ -112,19 +131,19 @@ public class RegistrarActivity extends AppCompatActivity {
 
                             FirebaseUser user = mAuth.getCurrentUser();
 
-                            Toast.makeText(RegistrarActivity.this, "Signin successful."+"User: "+user.getUid(),
-                                    Toast.LENGTH_SHORT).show();
-
                             //Guardamos el Uid del usuario logeado en una variable
                             String UidUsuario = user.getUid();
 
-                            Intent intentoLoginOk = new Intent(RegistrarActivity.this, MainActivity.class);
+                            Intent intentMain = new Intent(RegistrarActivity.this, MainActivity.class);
+
                             //Pasamos el Uid del usuario al MainActivity  mediante el método putExtra
                             //del intent
-                            intentoLoginOk.putExtra("Uid", UidUsuario);
+                            intentMain.putExtra("Uid", UidUsuario);
 
-                            //Lanzamos en intent
-                            startActivity(intentoLoginOk);
+                            startActivity(intentMain);
+
+                            Toast.makeText(RegistrarActivity.this, "Signin successful."+"User: "+user.getUid(),
+                                    Toast.LENGTH_SHORT).show();
 
                         } else {
 

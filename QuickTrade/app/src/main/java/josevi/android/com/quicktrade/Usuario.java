@@ -1,22 +1,27 @@
 package josevi.android.com.quicktrade;
 
+import java.io.Serializable;
+
 /**
  * Created by josevi on 13/12/2017.
  */
 
-public class Usuario {
+public class Usuario implements Serializable{
 
     private String nick;
     private String nombre;
     private String apellidos;
     private String email;
     private String direccion;
+    private String uid_key;
 
     public Usuario() {
 
     }
 
-    public Usuario(String nick, String nombre, String apellidos, String email, String direccion) {
+    public Usuario(String uid_key, String nick, String nombre, String apellidos, String email, String direccion) {
+
+        this.uid_key = uid_key;
         this.nick = nick;
         this.nombre = nombre;
         this.apellidos = apellidos;
@@ -62,5 +67,13 @@ public class Usuario {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    public String getUid_key() {
+        return uid_key;
+    }
+
+    public void setUid_key(String uid_key) {
+        this.uid_key = uid_key;
     }
 }

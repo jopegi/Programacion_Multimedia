@@ -29,10 +29,13 @@ public class ModificarActivity extends AppCompatActivity {
     private EditText cajaEmail;
     private EditText cajaDireccion;
 
-    private ArrayList<String> listadoNicks;
-
     //Objeto que hará referencia a la BBDD FireBase
     DatabaseReference referenciaBaseDatos;
+
+    //Objeto que hará referencia a la BBDD FireBase
+    DatabaseReference referenciaBaseDatos2;
+
+    private Usuario usu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,26 +55,36 @@ public class ModificarActivity extends AppCompatActivity {
         cajaEmail = (EditText) findViewById(R.id.editTextEmail);
         cajaDireccion = (EditText) findViewById(R.id.editTextDireccion);
 
+        Intent intentModificar = getIntent();
+        String uid_clave_nodo = intentModificar.getStringExtra("Uid");
+
+        Toast.makeText(ModificarActivity.this, "UID: "+uid_clave_nodo, Toast.LENGTH_SHORT).show();
+
         //PASO1-FIREBASE. Obtenemos la referencia con la nuestra Base de Datos FireBase. Indicamos el nodo que
         //nos interesa referenciar, en este caso, usuarios.
-        referenciaBaseDatos = FirebaseDatabase.getInstance().getReference(getString(R.string.nodo_usuarios));
+        referenciaBaseDatos = FirebaseDatabase.getInstance().getReference(getString(R.string.nodo_usuarios)).child(uid_clave_nodo);
+
+        //Query q = referenciaBaseDatos.orderByChild("uid_key").equalTo(uid_clave_nodo);
+        //Query q = ref2.child("uid_key").equalTo(uid_clave_nodo);
+
 
         //****************ESCUCHARÁ CUALQUIER CAMBIO EN EL NODO usuarios DE LA BBDD***********
-        referenciaBaseDatos.addValueEventListener(new ValueEventListener() {
+        referenciaBaseDatos.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                listadoNicks = new ArrayList<String>();
+                //Toast.makeText(ModificarActivity.this, "!! "+dataSnapshot.child("nombre").getValue(), Toast.LENGTH_SHORT).show();
 
-                for (DataSnapshot i: dataSnapshot.getChildren()){
+                //No hace falta recorrer con un for el DataSnapshot porque referenciaBaseDatos apunta
+                //a un nodo en concreto
+                usu = dataSnapshot.getValue(Usuario.class);
 
-                    Usuario usu = i.getValue(Usuario.class);
-                    String nickUsuario = usu.getNick();
-                    listadoNicks.add(nickUsuario);
-                    //Toast.makeText(InsertarActivity.this, "Nick size: "+usu.getNombre(), Toast.LENGTH_SHORT).show();
-
-                }
-                //Toast.makeText(InsertarActivity.this, "Nick size: "+cont, Toast.LENGTH_SHORT).show();
+                cajaNick.setText(usu.getNick());
+                cajaNick.setEnabled(false);
+                cajaNombre.setText(usu.getNombre());
+                cajaApellidos.setText(usu.getApellidos());
+                cajaEmail.setText(usu.getEmail());
+                cajaDireccion.setText(usu.getDireccion());
             }
 
             @Override
@@ -80,6 +93,7 @@ public class ModificarActivity extends AppCompatActivity {
             }
         });
         //**********************************************************************
+
 
         botonVolver.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,49 +111,35 @@ public class ModificarActivity extends AppCompatActivity {
                 String nick = cajaNick.getText().toString();
 
                 //Si la caja que contiene el nick no está vacía...
-                if (!TextUtils.isEmpty(nick) && existeNick(nick) == true){
-
-                    Query q = referenciaBaseDatos.orderByChild(getString(R.string.campo_nick)).equalTo(nick);
-
-                    q.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
+                if (!TextUtils.isEmpty(nick)){
 
                             String nombre = cajaNombre.getText().toString();
                             String apellidos = cajaApellidos.getText().toString();
                             String email = cajaEmail.getText().toString();
                             String direccion = cajaDireccion.getText().toString();
 
-                            for(DataSnapshot i : dataSnapshot.getChildren()){
+                            Intent intentModificar = getIntent();
+                            String uid_clave_nodo = intentModificar.getStringExtra("Uid");
 
-                                //el método getKey() devuelve la clave del nodo que contiene el nick que el
-                                //usuario indica en la interfaz gráfica
-                                String claveNodo = i.getKey();
+                            //Toast.makeText(ModificarActivity.this, "UID: "+uid_clave_nodo, Toast.LENGTH_SHORT).show();
+                            referenciaBaseDatos2 = FirebaseDatabase.getInstance().getReference(getString(R.string.nodo_usuarios));
 
                                 if (!TextUtils.isEmpty(nombre)){
-                                    referenciaBaseDatos.child(claveNodo).child(getString(R.string.campo_nombre)).setValue(cajaNombre.getText().toString());
+                                    referenciaBaseDatos2.child(uid_clave_nodo).child(getString(R.string.campo_nombre)).setValue(cajaNombre.getText().toString());
                                 }
 
                                 if (!TextUtils.isEmpty(apellidos)){
-                                    referenciaBaseDatos.child(claveNodo).child(getString(R.string.campo_apellidos)).setValue(cajaApellidos.getText().toString());
+                                    referenciaBaseDatos2.child(uid_clave_nodo).child(getString(R.string.campo_apellidos)).setValue(cajaApellidos.getText().toString());
                                 }
 
                                 if (!TextUtils.isEmpty(email)){
-                                    referenciaBaseDatos.child(claveNodo).child(getString(R.string.campo_email)).setValue(cajaEmail.getText().toString());
+                                    referenciaBaseDatos2.child(uid_clave_nodo).child(getString(R.string.campo_email)).setValue(cajaEmail.getText().toString());
                                 }
 
                                 if (!TextUtils.isEmpty(direccion)){
-                                    referenciaBaseDatos.child(claveNodo).child(getString(R.string.campo_direccion)).setValue(cajaDireccion.getText().toString());
+                                    referenciaBaseDatos2.child(uid_clave_nodo).child(getString(R.string.campo_direccion)).setValue(cajaDireccion.getText().toString());
                                 }
 
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
 
                     Toast.makeText(ModificarActivity.this, "Información de usuario modificada con éxito!!", Toast.LENGTH_SHORT).show();
 
@@ -154,6 +154,7 @@ public class ModificarActivity extends AppCompatActivity {
 
     }
 
+/*
     //Método para comparar el nuevo nick con los ya existentes en FireBase
     public boolean existeNick (String nuevoNick){
 
@@ -174,4 +175,5 @@ public class ModificarActivity extends AppCompatActivity {
         }
         return rtn;
     }
+*/
 }
