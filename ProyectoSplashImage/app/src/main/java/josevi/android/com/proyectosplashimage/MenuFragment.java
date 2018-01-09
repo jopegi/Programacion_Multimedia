@@ -10,20 +10,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/*
+* Fragment de tipo estático que se cargará en la actividad MenuActivity y servirá para
+* mostrar un menú que actuará sobre el fragment dinámico WellcomeFragment
+* */
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link MenuFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link MenuFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class MenuFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,7 +31,7 @@ public class MenuFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
+    private ComunicadorFragmentEstatic mListener;
 
     //Referencia al contededor de datos que se visualizarán en nuestro RecyclerView
     ArrayList<DatosRecyclerView> listaMenu;
@@ -107,8 +104,16 @@ public class MenuFragment extends Fragment {
         adapter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Toast.makeText(getContext(),"Selección: "+listaMenu.get(recycler.getChildAdapterPosition(view)).getNombre(),Toast.LENGTH_SHORT).show();
+                if (listaMenu.get(recycler.getChildAdapterPosition(view)).getNombre().compareTo("Perfil")==0){
+                    mListener.carregarPerfil();
+                }else if(listaMenu.get(recycler.getChildAdapterPosition(view)).getNombre().compareTo("Juego")==0){
+                    mListener.iniciarJoc();
+                }else if(listaMenu.get(recycler.getChildAdapterPosition(view)).getNombre().compareTo("Instrucciones")==0){
+                    mListener.voreInstruccions();
+                }else if(listaMenu.get(recycler.getChildAdapterPosition(view)).getNombre().compareTo("Información")==0){
+                    mListener.voreInformacio();
+                }
+                //Toast.makeText(getContext(),"Selección: "+listaMenu.get(recycler.getChildAdapterPosition(view)).getNombre(),Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -126,18 +131,14 @@ public class MenuFragment extends Fragment {
 
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
+    /*
+    * Método que permite adjuntar el fragment a una actividad o a un fragmento
+    */
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+        if (context instanceof ComunicadorFragmentEstatic) {
+            mListener = (ComunicadorFragmentEstatic) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -150,31 +151,17 @@ public class MenuFragment extends Fragment {
         mListener = null;
     }
 
-    /*public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    /*
+    Interfaz donde debemos definir los métodos que permitirán interactuar a este fragmento
+    *con una atividad u otro fragmento. Esta interfaz deberá de implementarse y sobreescribir
+    *sus métodos abstractos en la actividad o fragmento con el que se pretenda interactuar
+    */
+    public interface ComunicadorFragmentEstatic {
 
-        //Definimos un Array de Strings con las opciones del menú
-        String[] opcionesMenu = new String[]{"PERFIL", "JUEGO", "INSTRUCCIONES", "INFORMACIÓN"};
-
-        //Convertimos el Array anterior en un ArrayList
-        ArrayList<String> listaMenu = new ArrayList<String>(Arrays.asList(opcionesMenu));
-
-        MenuAdapter adapter = new MenuAdapter(getActivity(),listaMenu);
-
-    }*/
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void carregarPerfil();
+        void iniciarJoc();
+        void voreInstruccions();
+        void voreInformacio();
     }
+
 }
