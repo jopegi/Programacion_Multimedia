@@ -17,12 +17,18 @@ public class MenuActivity extends AppCompatActivity implements WellcomeFragment.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-
-        //Instanciamos el fragment dinámico WellcomeFragment en la actividad
-        //y lo añadimos a la misma en el frameLayout cuyo id se denomina contenidoDinamico
-        WellcomeFragment fragmentDinamico = new WellcomeFragment();
+        //Instanciamos el fragment dinámico WellcomeFragment en la actividad y lo añadimos a la
+        //misma, en el FrameLayout cuyo id se denomina contenidoDinamico. Podíamos haber instaciado
+        //el Fragment directamente mediante su constructor, pero lo hemos hecho mediante el método
+        //newInstance(param1) para poder pasarle un texto que se muestre al inicio de la Actividad.
+        WellcomeFragment fragmentDinamico = WellcomeFragment.newInstance ("Bienvenido a la app");
+        //Toast.makeText(this, ""+fragmentDinamico.getArguments().getString("titol"), Toast.LENGTH_SHORT).show();
+        //Creamos un manajador de Fragments
         FragmentManager fm = getSupportFragmentManager();
+        //Iniciamos una transacción de Fragments
         FragmentTransaction ft = fm.beginTransaction();
+        //Añadimos al view FrameLayout (android:id="@+id/contenidoDinamico") definido en la interfaz
+        //de MenuActivity el Fragment instanciado anteriormente
         ft.add(R.id.contenidoDinamico, fragmentDinamico);
         ft.commit();
     }
@@ -42,6 +48,7 @@ public class MenuActivity extends AppCompatActivity implements WellcomeFragment.
         //WellcomeFragment, mediante su método newInstance(). Esto es así, porque el
         //constructor de una fragmento no admite parámetros.
         WellcomeFragment fragmentDinamico = WellcomeFragment.newInstance("Bienvenido a Perfil");
+
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.contenidoDinamico, fragmentDinamico);

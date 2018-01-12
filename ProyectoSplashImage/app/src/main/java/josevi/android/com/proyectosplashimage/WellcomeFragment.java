@@ -11,7 +11,8 @@ import android.widget.TextView;
 
 public class WellcomeFragment extends Fragment {
 
-    private static final String ARG_PARAM1 = "titol";
+    private static final String ARG_TITOL = "titol";
+    private static final String ARG_AUTOR = "autor";
     private String mParam1;
     private TextView caixaTitol;
     private ComunicadorFragmentDinamic mListener;
@@ -20,37 +21,48 @@ public class WellcomeFragment extends Fragment {
         //Se requiere que el constructor esté vacío
     }
 
-    //Método newInstance() que se utiliza para que el fragment
-    //pueda recibir parámetros
+    //Método newInstance() que se utiliza para que el fragment pueda recibir parámetros
     public static WellcomeFragment newInstance(String param1) {
+        //1 Se instancia un objeto fragment
         WellcomeFragment fragment = new WellcomeFragment();
+        //2 Se inatancia un objeto de tipo Bundle (colección pares clave-valor)
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
+        //3 Introducimos en el Bundle la clave y el valor del parámetro
+        args.putString(ARG_TITOL, param1);
+        //4  Con el setArguments(args) se guardan los atributos de nuestro Fragment en un objeto
+        //Bundle propio de la clase Fragment. Dicho objeto se denomina mSavedFragmentState
         fragment.setArguments(args);
+        //5 El método newInstance() devuelve un Fragment con los atributos seteados por el método anterior
         return fragment;
     }
 
+    //Se crea el Fragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
+            //Bundle b = getArguments();
+            //mParam1 = b.getString(ARG_PARAM1);
+
+            mParam1 = getArguments().getString(ARG_TITOL);
 
         }
     }
 
+    //Se asocia el layout al Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-                View v =inflater.inflate(R.layout.fragment_wellcome, container, false);
-                caixaTitol = (TextView) v.findViewById(R.id.LabelMensaje);
-                caixaTitol.setText(mParam1);
+        View v = inflater.inflate(R.layout.fragment_wellcome, container, false);
+        caixaTitol = (TextView) v.findViewById(R.id.LabelMensaje);
+        caixaTitol.setText(mParam1);
 
-                return v;
+        return v;
     }
 
 
+    //Se adjunta el Fragment a la Actividad
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -62,6 +74,7 @@ public class WellcomeFragment extends Fragment {
         }
     }
 
+    //Se libera el Fragment a la Actividad
     @Override
     public void onDetach() {
         super.onDetach();
@@ -77,4 +90,5 @@ public class WellcomeFragment extends Fragment {
     public interface ComunicadorFragmentDinamic {
         void onFragmentInteraction(Uri uri);
     }
+
 }
