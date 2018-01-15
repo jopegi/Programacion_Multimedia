@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 
 public class InsertarActivity extends AppCompatActivity {
 
-    private TextView cajaNick, cajaNombre, cajaApellidos, cajaDireccion;
+    private EditText cajaNick, cajaNombre, cajaApellidos, cajaDireccion;
     private Button botonVolver, botonInsertar;
 
     //Objeto que hará referencia a la BBDD FireBase
@@ -37,10 +38,10 @@ public class InsertarActivity extends AppCompatActivity {
         referenciaBaseDatos = FirebaseDatabase.getInstance().getReference(getString(R.string.nodo_usuarios));
 
         //Instanciamos los views de la vista
-        cajaNick = (TextView) findViewById(R.id.cajaNick);
-        cajaNombre = (TextView) findViewById(R.id.cajaNombre);
-        cajaApellidos = (TextView) findViewById(R.id.cajaApellidos);
-        cajaDireccion = (TextView) findViewById(R.id.cajaDireccion);
+        cajaNick = (EditText) findViewById(R.id.cajaNick);
+        cajaNombre = (EditText) findViewById(R.id.cajaNombre);
+        cajaApellidos = (EditText) findViewById(R.id.cajaApellidos);
+        cajaDireccion = (EditText) findViewById(R.id.cajaDireccion);
         /*
         No incluimos un TextView para el email porque al este ir asociado al registro de autentificación de
         FireBase no es lógico que este sea diferente en los datos personales del usuario

@@ -99,8 +99,10 @@ public class ModificarActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intentVolver = new Intent(ModificarActivity.this, MainActivity.class);
-                startActivity(intentVolver);
+                //Intent intentVolver = new Intent(ModificarActivity.this, MainActivity.class);
+                //startActivity(intentVolver);
+                finish(); //Utilizo finish() porque si utilizo un Intent para volver a la actividad
+                //anterior al salir y volver a entrar en modificar datos del usuario da un error de conexión.
             }
         });
 

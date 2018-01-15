@@ -33,7 +33,7 @@
         android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Descripción"
+        android:hint="Descripción"
         app:layout_constraintEnd_toEndOf="@+id/spinnerCategoria"
         app:layout_constraintStart_toStartOf="@+id/textView2Categoria"
         app:layout_constraintTop_toBottomOf="@+id/spinnerProducto" />
@@ -66,7 +66,7 @@
         android:layout_marginTop="15dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Precio(€)"
+        android:hint="Precio(€)"
         app:layout_constraintEnd_toEndOf="@+id/textViewTitulo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spinnerCategoria" />
