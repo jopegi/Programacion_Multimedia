@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryDark"
+    tools:context="josevi.android.com.sqlite_prueba1.ConsultasActivity">
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+
+            <RadioButton
+                android:id="@+id/rbProfesores"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Profesores" />
+
+            <RadioButton
+                android:id="@+id/rbAlumnos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Alumnos" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:layout_below="@id/linearLayout1"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/rbCurso"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:text="Curso" />
+
+                <RadioButton
+                    android:id="@+id/rbCiclo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="10dp"
+                    android:text="Ciclo" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/editTextCurso"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="curso"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/editTextCiclo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="ciclo"
+                android:inputType="textPersonName" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/LinearLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linearLayout2"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <Button
+            android:id="@+id/btnBuscar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Buscar" />
+
+        <Button
+            android:id="@+id/btnLimpiar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Reset" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/LinearLayout6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/LinearLayout5">
+
+        <ListView
+            android:id="@+id/listView1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp" />
+    </LinearLayout>
+
+</RelativeLayout>

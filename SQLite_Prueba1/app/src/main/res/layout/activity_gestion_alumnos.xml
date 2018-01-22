@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="josevi.android.com.sqlite_prueba1.GestionAlumnosActivity"
+    tools:layout_editor_absoluteY="81dp">
+
+    <TextView
+        android:id="@+id/labelAlumnos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="GESTIÓN ALUMNOS"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTexNombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="61dp"
+        android:ems="10"
+        android:hint="nombre"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextEdad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="edad"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTexNombre" />
+
+    <EditText
+        android:id="@+id/editTextCiclo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:hint="ciclo"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEdad" />
+
+    <EditText
+        android:id="@+id/editTextCurso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:ems="10"
+        android:hint="curso"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/editTextCiclo"
+        app:layout_constraintTop_toBottomOf="@+id/editTextCiclo" />
+
+    <EditText
+        android:id="@+id/editTextNotaMedia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:hint="nota media"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextCurso" />
+
+    <Button
+        android:id="@+id/btnInsertar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="16dp"
+        android:text="Insertar"
+        app:layout_constraintBottom_toTopOf="@+id/btnBorrarBaseDatos"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="121dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnBorrarBaseDatos"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btnBorrarBaseDatos" />
+
+    <Button
+        android:id="@+id/btnBorrar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="13dp"
+        android:text="Borrar"
+        app:layout_constraintBottom_toTopOf="@+id/spinner"
+        app:layout_constraintStart_toStartOf="@+id/spinner" />
+
+    <Button
+        android:id="@+id/btnBorrarBaseDatos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:layout_marginStart="16dp"
+        android:background="@android:color/holo_red_dark"
+        android:padding="10dp"
+        android:text="Borrar Base Datos"
+        android:textColor="@android:color/background_light"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

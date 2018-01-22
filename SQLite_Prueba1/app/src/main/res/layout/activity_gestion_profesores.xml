@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="josevi.android.com.sqlite_prueba1.GestionProfesoresActivity"
+    tools:layout_editor_absoluteY="81dp">
+
+    <TextView
+        android:id="@+id/labelProfesores"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:layout_marginTop="16dp"
+        android:text="GESTIÓN PROFESORES"
+        app:layout_constraintBottom_toTopOf="@+id/editTextCiclo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editTextCiclo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="19dp"
+        android:layout_marginStart="16dp"
+        android:ems="10"
+        android:hint="nombre"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/editTextEdad"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/labelProfesores" />
+
+    <EditText
+        android:id="@+id/editTextEdad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="16dp"
+        android:ems="10"
+        android:hint="edad"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/editTextCiclo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextCiclo" />
+
+    <EditText
+        android:id="@+id/editTextCiclo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="13dp"
+        android:layout_marginStart="16dp"
+        android:ems="10"
+        android:hint="ciclo"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/editTextCurso"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextEdad" />
+
+    <EditText
+        android:id="@+id/editTextCurso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="11dp"
+        android:layout_marginStart="16dp"
+        android:ems="10"
+        android:hint="curso"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/editTextDespacho"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextCiclo" />
+
+    <EditText
+        android:id="@+id/editTextDespacho"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="26dp"
+        android:layout_marginStart="16dp"
+        android:ems="10"
+        android:hint="despacho"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/spinner"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextCurso" />
+
+    <Button
+        android:id="@+id/btnInsertar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginStart="16dp"
+        android:text="Insertar"
+        app:layout_constraintBottom_toTopOf="@+id/btnBorrarBaseDatos"
+        app:layout_constraintEnd_toStartOf="@+id/spinner"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="45dp"
+        android:layout_marginEnd="17dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnBorrarBaseDatos"
+        app:layout_constraintEnd_toStartOf="@+id/btnBorrar"
+        app:layout_constraintStart_toEndOf="@+id/btnInsertar"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDespacho" />
+
+    <Button
+        android:id="@+id/btnBorrar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="26dp"
+        android:text="Borrar"
+        app:layout_constraintBottom_toBottomOf="@+id/btnInsertar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/spinner"
+        app:layout_constraintTop_toTopOf="@+id/btnInsertar" />
+
+    <Button
+        android:id="@+id/btnBorrarBaseDatos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:layout_marginStart="16dp"
+        android:background="@android:color/holo_red_dark"
+        android:padding="10dp"
+        android:text="Borrar Base Datos"
+        android:textColor="@android:color/background_light"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+
+</android.support.constraint.ConstraintLayout>
