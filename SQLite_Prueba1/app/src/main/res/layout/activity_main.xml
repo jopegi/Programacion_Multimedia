@@ -11,10 +11,8 @@
         android:id="@+id/labelTitulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="244dp"
         android:layout_marginTop="29dp"
         android:text="SQLITE - CENTRO EDUCATIVO"
-        app:layout_constraintBottom_toTopOf="@+id/btnProfesores"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,35 +22,41 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="19dp"
-        android:layout_marginStart="9dp"
+        android:layout_marginStart="1dp"
         android:text="Profesores"
         app:layout_constraintBottom_toTopOf="@+id/btnConsultas"
-        app:layout_constraintEnd_toStartOf="@+id/btnAlumnos"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/labelTitulo" />
+        app:layout_constraintStart_toStartOf="@+id/btnConsultas" />
 
     <Button
         android:id="@+id/btnAlumnos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="19dp"
-        android:layout_marginEnd="30dp"
         android:text="Alumnos"
         app:layout_constraintBottom_toTopOf="@+id/btnConsultas"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnProfesores" />
+        app:layout_constraintEnd_toEndOf="@+id/btnAsignaturas"
+        app:layout_constraintStart_toEndOf="@+id/btnAsignaturas" />
 
     <Button
         android:id="@+id/btnConsultas"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="102dp"
+        android:layout_height="51dp"
+        android:layout_marginBottom="101dp"
         android:layout_marginEnd="57dp"
         android:layout_marginStart="57dp"
         android:text="Consultas"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnProfesores" />
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnAsignaturas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="37dp"
+        android:text="Asignaturas"
+        app:layout_constraintBottom_toTopOf="@+id/btnProfesores"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

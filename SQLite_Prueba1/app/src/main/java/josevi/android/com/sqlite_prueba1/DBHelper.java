@@ -27,6 +27,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         db.execSQL(estructura.PROFESORES_CREATETABLE);
         db.execSQL(estructura.ALUMNOS_CREATETABLE);
+        db.execSQL(estructura.ASIGNATURAS_CREATETABLE);
 
 
     }
@@ -37,6 +38,7 @@ public class DBHelper extends SQLiteOpenHelper {
         //Se eliminan versiones antiguas de las tablas
         db.execSQL(estructura.PROFESORES_DELETETABLE);
         db.execSQL(estructura.ALUMNOS_DELETETABLE);
+        db.execSQL(estructura.ASIGNATURAS_DELETETABLE);
         //Se crean las versiones nuevas de las tablas
         onCreate(db);
 

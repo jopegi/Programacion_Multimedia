@@ -93,6 +93,8 @@ public class ConsultasActivity extends AppCompatActivity {
 
                         ArrayList<String> profesores = new ArrayList<String>();
 
+
+
                         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
                         Cursor cursor = buscarProfesoresPorCurso(cajaCurso.getText().toString());
@@ -104,6 +106,8 @@ public class ConsultasActivity extends AppCompatActivity {
 
                             } while (cursor.moveToNext());
                         }
+
+                        Toast.makeText(ConsultasActivity.this, "Array profesores: " + profesores.size(), Toast.LENGTH_SHORT).show();
 
                         db.close();
 

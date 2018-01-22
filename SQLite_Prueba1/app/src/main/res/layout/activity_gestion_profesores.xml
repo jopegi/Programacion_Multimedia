@@ -11,24 +11,21 @@
         android:id="@+id/labelProfesores"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
+        android:layout_marginStart="106dp"
         android:layout_marginTop="16dp"
         android:text="GESTIÓN PROFESORES"
-        app:layout_constraintBottom_toTopOf="@+id/editTextCiclo"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextCiclo"
+        android:id="@+id/editTextNombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="19dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="nombre"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/editTextEdad"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/labelProfesores" />
 
@@ -36,38 +33,35 @@
         android:id="@+id/editTextEdad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="17dp"
         android:ems="10"
         android:hint="edad"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/editTextCiclo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextCiclo" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextCurso" />
 
     <EditText
         android:id="@+id/editTextCiclo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="13dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="107dp"
         android:ems="10"
         android:hint="ciclo"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/editTextCurso"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextEdad" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editTextCurso"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="11dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="17dp"
         android:ems="10"
         android:hint="curso"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/editTextDespacho"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextCiclo" />
 
@@ -75,48 +69,46 @@
         android:id="@+id/editTextDespacho"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="26dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="14dp"
         android:ems="10"
         android:hint="despacho"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/spinner"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextCurso" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextEdad" />
 
     <Button
         android:id="@+id/btnInsertar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="26dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="18dp"
         android:text="Insertar"
-        app:layout_constraintBottom_toTopOf="@+id/btnBorrarBaseDatos"
-        app:layout_constraintEnd_toStartOf="@+id/spinner"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextDespacho" />
 
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="45dp"
-        android:layout_marginEnd="17dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnBorrarBaseDatos"
-        app:layout_constraintEnd_toStartOf="@+id/btnBorrar"
-        app:layout_constraintStart_toEndOf="@+id/btnInsertar"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDespacho" />
+        android:layout_height="44dp"
+        android:layout_marginBottom="33dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editTextDespacho"
+        app:layout_constraintTop_toBottomOf="@+id/btnBorrar" />
 
     <Button
         android:id="@+id/btnBorrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="102dp"
         android:layout_marginEnd="26dp"
         android:text="Borrar"
-        app:layout_constraintBottom_toBottomOf="@+id/btnInsertar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/spinner"
-        app:layout_constraintTop_toTopOf="@+id/btnInsertar" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/btnBorrarBaseDatos"
@@ -130,7 +122,6 @@
         android:textColor="@android:color/background_light"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

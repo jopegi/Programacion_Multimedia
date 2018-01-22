@@ -8,7 +8,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button botonProfesores, botonAlumnos, botonConsultas;
+    private Button botonProfesores, botonAlumnos, botonConsultas, botonAsignaturas;
 
 
     @Override
@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
         botonProfesores = (Button) findViewById(R.id.btnProfesores);
         botonAlumnos = (Button) findViewById(R.id.btnAlumnos);
         botonConsultas = (Button) findViewById(R.id.btnConsultas);
+        botonAsignaturas = (Button) findViewById(R.id.btnAsignaturas);
 
         botonProfesores.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,6 +47,16 @@ public class MainActivity extends AppCompatActivity {
 
                 Intent intentoConsultas = new Intent(MainActivity.this,ConsultasActivity.class);
                 startActivity(intentoConsultas);
+
+            }
+        });
+
+        botonAsignaturas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intentoAsignaturas = new Intent(MainActivity.this,GestionAsignaturasActivity.class);
+                startActivity(intentoAsignaturas);
 
             }
         });

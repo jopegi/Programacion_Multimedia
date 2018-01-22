@@ -38,7 +38,7 @@ public class GestionProfesoresActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gestion_profesores);
 
-        cajaNombre = (EditText) findViewById(R.id.editTextCiclo);
+        cajaNombre = (EditText) findViewById(R.id.editTextNombre);
         cajaEdad = (EditText) findViewById(R.id.editTextEdad);
         cajaCurso = (EditText) findViewById(R.id.editTextCurso);
         cajaCiclo = (EditText) findViewById(R.id.editTextCiclo);
