@@ -47,6 +47,30 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.ArrayList;
 
+
+/*
+        //Según la información de android developers de Google, para recuperar una colección
+        //con los metadatos de un directorio habría que implementar lo siguiente:
+        Task<MetadataBuffer> queryTask = mDriveResourceClient
+                .queryChildren(folder, query);
+
+        */
+
+//Pero, no explican como obtener una referencia al directorio el contenido del cual nos interesa
+//listar.....
+
+        /*La lógica me dice que:
+        * - Primero debería de implementarse un método para acceder al nodo principal
+        *   de directorios del Drive para obtener un listado de los mismos.
+        * - A continuación, comprobar si el directorio que el usuario indica gráficamente
+        *   se encuentra entre los existentes en la lista obtenida préviamente.
+        * - Después, si el directorio indicado existe, obtener su DriveId y, a partir del
+        *   mismo, mediante la Query definida y el DriveId (folder) obtener un objeto
+        *   MetadataBuffer con sus metadatos para después recorrerlo obteniendo la información
+        *   que se necesite. En este caso, los nombres de los archivos y directorios que contiene...
+        *   ¿Pero cómo?
+        */
+
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
     private final static String LOGTAG = "android-drive";
@@ -293,6 +317,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
 
 /*
+        //En su página Web (http://www.sgoliver.net/), Salvador Gómez Oliver trata el tema de Google
+        //Dripe Api pero su código ya está obsoleto.
+
         queryTask = mDriveResourceClient.query(query);
 
         queryTask
