@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 
 //Esta clase va a recibir una lista para poderla mostra ren nuestro Recycler
-public class AdapterDatos extends RecyclerView.Adapter<AdapterDatos.ViewHolderDatos> implements  View.OnClickListener{
+public class AdapterDatos extends RecyclerView.Adapter<AdapterDatos.UnElementDelRecycler> implements  View.OnClickListener{
 
     ArrayList<DatosRecyclerView> listaMenu;
 
@@ -30,18 +30,19 @@ public class AdapterDatos extends RecyclerView.Adapter<AdapterDatos.ViewHolderDa
 
     @Override
     //Método que enlazará el adaptador con el archivo item_list.xml
-    public ViewHolderDatos onCreateViewHolder(ViewGroup parent, int viewType) {
+    public UnElementDelRecycler onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, null, false);
+
 
         //Ponemos a la eschucha nuestra aplicación
         view.setOnClickListener(this);
 
-        return new ViewHolderDatos(view);
+        return new UnElementDelRecycler(view);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolderDatos holder, int position) {
+    public void onBindViewHolder(UnElementDelRecycler holder, int position) {
 
         //holder.asignarDatos(listaMenu.get(position));
         holder.txtNombre.setText(listaMenu.get(position).getNombre());
@@ -68,21 +69,29 @@ public class AdapterDatos extends RecyclerView.Adapter<AdapterDatos.ViewHolderDa
     }
 
 
-    public class ViewHolderDatos extends RecyclerView.ViewHolder {
+    public static class UnElementDelRecycler extends RecyclerView.ViewHolder {
 
         TextView txtNombre;
         ImageView foto;
 
-        //TextView dato;
+            //TextView dato;
 
-        public ViewHolderDatos(View itemView) {
-            super(itemView);
+        public UnElementDelRecycler(View itemView) {
+                super(itemView);
 
             //Indicamos la vista que se utilizará para mostrar los datos del RecyclerView
             //dato = (TextView) itemView.findViewById(R.id.idDatos);
 
             txtNombre = (TextView) itemView.findViewById(R.id.idNombre);
             foto = (ImageView) itemView.findViewById(R.id.idImagen);
+             /*
+        foto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        */
         }
 
         //Mi método asignarDatos()

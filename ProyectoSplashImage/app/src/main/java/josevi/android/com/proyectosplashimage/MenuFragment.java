@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.view.menu.MenuAdapter;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -91,6 +92,9 @@ public class MenuFragment extends Fragment {
         //>>de tipo LinearLayoutManager
         //>>que se muestre en vertical
         recycler.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+
+        //recycler.setLayoutManager(new GridLayoutManager(getContext(), 2));
+
 
         llenarLista();
 

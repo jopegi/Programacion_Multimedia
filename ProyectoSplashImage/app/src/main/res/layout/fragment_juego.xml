@@ -1,0 +1,77 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="josevi.android.com.proyectosplashimage.JuegoFragment">
+
+
+    <LinearLayout
+        android:id="@+id/linearLayoutTitulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="vertical"
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:padding="5dp"
+            android:text="MATHDICE RUNNING"
+            android:textColor="@android:color/background_light"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@id/linearLayoutTitulo">
+
+        <TextView
+            android:id="@+id/textViewJugador"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:text="Jugador en curso:" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linearLayout0"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textViewNick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Nick"
+            android:paddingBottom="5dp"
+            android:paddingLeft="20dp"
+            android:paddingTop="5dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textViewPuntos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Puntuación"
+            android:paddingBottom="5dp"
+            android:paddingLeft="20dp"
+            android:paddingTop="5dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold" />
+    </LinearLayout>
+</RelativeLayout>

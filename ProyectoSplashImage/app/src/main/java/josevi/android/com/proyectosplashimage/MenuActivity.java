@@ -1,5 +1,6 @@
 package josevi.android.com.proyectosplashimage;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -11,7 +12,10 @@ import android.widget.Toast;
 //Se han tenido que implementar las interfaces ComunicadorFragmentDinamic y ComunicadorFragmentEstatic
 //y sus correspondientes métodos abstractos para poder interactuar con los fragmentos en las que se
 //definen (dichas interfaces)
-public class MenuActivity extends AppCompatActivity implements WellcomeFragment.ComunicadorFragmentDinamic,MenuFragment.ComunicadorFragmentEstatic{
+public class MenuActivity extends AppCompatActivity implements WellcomeFragment.ComunicadorFragmentDinamic,
+        MenuFragment.ComunicadorFragmentEstatic,JuegoFragment.ComunicadorFragmentJuego,PerfilFragment.ComunicadorFragmentPerfil{
+
+    Jugador jugador1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,37 +37,52 @@ public class MenuActivity extends AppCompatActivity implements WellcomeFragment.
         ft.commit();
     }
 
-    //Método abstracto de la interfaz ComunicadorFragmentDinamic perteneciente al fragment dinámico
-    //WellcomeFragment
+    //Método abstracto de la interfaz ComunicadorFragmentPerfil perteneciente al fragment dinámico
+    //PerfilFragment
     @Override
-    public void onFragmentInteraction(Uri uri) {
+    public void recollirDadesPerfil(Jugador j) {
 
-    }
+        //Recogemos el objeto jugador que viene de PerfilFragment y hacemos que apunte a la referencia
+        //del objeto Jugador que hemos definido al inicio de esta actividad. Así, conseguimos que dicho
+        //objeto jugador sea accesible para toda la clase.
+        jugador1=j;
 
-    //Métodos abstractos de la interfaz ComunicadorFragmentEstatic perteneciente al fragment estático
-    //MenuFragment
-    @Override
-    public void carregarPerfil() {
-        //Desde esta actividad le pasamos un parémetro de tipo String al fragmento dinámico
-        //WellcomeFragment, mediante su método newInstance(). Esto es así, porque el
-        //constructor de una fragmento no admite parámetros.
-        WellcomeFragment fragmentDinamico = WellcomeFragment.newInstance("Bienvenido a Perfil");
-
+        WellcomeFragment fragmentDinamico = WellcomeFragment.newInstance("Bienvenido al juego " + jugador1.getNombre());
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.contenidoDinamico, fragmentDinamico);
         ft.commit();
     }
 
+    //Métodos abstractos de la interfaz ComunicadorFragmentEstatic perteneciente al fragment estático
+    //MenuFragment
     @Override
-    public void iniciarJoc() {
-        //Desde esta actividad le pasamos un parémetro de tipo String al fragmento dinámico
+    public void carregarPerfil() {
+        //Desde esta actividad le pasamos un parámetro de tipo String al fragmento dinámico
         //WellcomeFragment, mediante su método newInstance(). Esto es así, porque el
         //constructor de una fragmento no admite parámetros.
-        WellcomeFragment fragmentDinamico = WellcomeFragment.newInstance("Bienvenido a Juego");
+       /*
+        WellcomeFragment fragmentDinamico = WellcomeFragment.newInstance("Bienvenido a Perfil");
+
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.contenidoDinamico, fragmentDinamico);
+        ft.commit();
+        */
+        PerfilFragment fragmentPerfil = new PerfilFragment();
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.contenidoDinamico, fragmentPerfil);
+        ft.commit();
+
+    }
+
+    @Override
+    public void iniciarJoc() {
+        JuegoFragment fragmentJuego = JuegoFragment.newInstance(jugador1.getNick(),jugador1.getNombre());
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.contenidoDinamico, fragmentJuego);
         ft.commit();
     }
     @Override
@@ -87,5 +106,10 @@ public class MenuActivity extends AppCompatActivity implements WellcomeFragment.
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.contenidoDinamico, fragmentDinamico);
         ft.commit();
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }
