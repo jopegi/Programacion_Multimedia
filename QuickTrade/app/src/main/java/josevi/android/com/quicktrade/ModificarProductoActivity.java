@@ -149,7 +149,7 @@ public class ModificarProductoActivity extends AppCompatActivity {
 
                                     if (!TextUtils.isEmpty(cajaDescripcion.getText().toString())) {
 
-                                        referenciaBaseDatos.child(clave).child("descripción").setValue(cajaDescripcion.getText().toString());
+                                        referenciaBaseDatos.child(clave).child("descripcion").setValue(cajaDescripcion.getText().toString());
                                     }
 
                                     if (!TextUtils.isEmpty(spinnerCategoria.getSelectedItem().toString())) {

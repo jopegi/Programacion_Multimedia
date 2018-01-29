@@ -74,8 +74,9 @@ public class MostrarActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intentVolver = new Intent(MostrarActivity.this, MainActivity.class);
-                startActivity(intentVolver);
+                //Intent intentVolver = new Intent(MostrarActivity.this, MainActivity.class);
+                //startActivity(intentVolver);
+                finish();
             }
         });
 
