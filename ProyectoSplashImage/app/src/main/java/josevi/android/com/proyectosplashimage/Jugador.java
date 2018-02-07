@@ -10,8 +10,8 @@ import android.os.Parcelable;
 public class Jugador implements Parcelable {
 
     //Atributos de la clase
-    private String nick;
-    private String nombre;
+    private String nick = "No nick";    //Indicamos un nick por defecto
+    private String nombre = "No name";  //Indicamos un nombre por defecto
     private int puntos;
 
     //Constructor 1

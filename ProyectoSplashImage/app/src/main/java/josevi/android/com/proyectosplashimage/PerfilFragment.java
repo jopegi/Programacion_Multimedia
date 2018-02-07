@@ -62,6 +62,7 @@ public class PerfilFragment extends Fragment {
         cajaNombre = (EditText) v.findViewById(R.id.editTextNombre);
         botonGuardar = (Button) v.findViewById(R.id.btnGuardar);
 
+
         //Evento del botón guardar de la interfaz
         botonGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,7 +86,6 @@ public class PerfilFragment extends Fragment {
                 }else{
 
                     Toast.makeText(getActivity(), "Debe de rellenar los campos nombre y nick!", Toast.LENGTH_SHORT).show();
-
                 }
 
             }

@@ -1,4 +1,5 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -50,6 +51,15 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/labelNick"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="10dp"
+            android:text="Nick:"
+            android:textSize="12sp" />
+
+        <TextView
             android:id="@+id/textViewNick"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -63,6 +73,15 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/labelNombre"
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="10dp"
+            android:text="Nombre:"
+            android:textSize="12sp" />
+
+        <TextView
             android:id="@+id/textViewPuntos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -74,4 +93,33 @@
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold" />
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageViewDado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout1"
+        android:layout_marginEnd="45dp"
+        android:layout_marginTop="32dp"
+        android:layout_toStartOf="@+id/btnLanzar"
+        android:src="@drawable/nota_musical_120x120" />
+
+    <Button
+        android:id="@+id/btnLanzar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/imageViewDado"
+        android:layout_marginEnd="50dp"
+        android:text="Lanzar dado" />
+
+    <Button
+        android:id="@+id/btnStop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/btnLanzar"
+        android:layout_below="@+id/btnLanzar"
+        android:layout_marginEnd="12dp"
+        android:layout_marginTop="21dp"
+        android:text="Stop" />
 </RelativeLayout>

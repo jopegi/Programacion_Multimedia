@@ -15,7 +15,7 @@ import android.widget.Toast;
 public class MenuActivity extends AppCompatActivity implements WellcomeFragment.ComunicadorFragmentDinamic,
         MenuFragment.ComunicadorFragmentEstatic,JuegoFragment.ComunicadorFragmentJuego,PerfilFragment.ComunicadorFragmentPerfil{
 
-    Jugador jugador1;
+    Jugador jugador1 = new Jugador();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +35,7 @@ public class MenuActivity extends AppCompatActivity implements WellcomeFragment.
         //de MenuActivity el Fragment instanciado anteriormente
         ft.add(R.id.contenidoDinamico, fragmentDinamico);
         ft.commit();
+
     }
 
     //Método abstracto de la interfaz ComunicadorFragmentPerfil perteneciente al fragment dinámico
@@ -46,44 +47,31 @@ public class MenuActivity extends AppCompatActivity implements WellcomeFragment.
         //del objeto Jugador que hemos definido al inicio de esta actividad. Así, conseguimos que dicho
         //objeto jugador sea accesible para toda la clase.
         jugador1=j;
-
-        WellcomeFragment fragmentDinamico = WellcomeFragment.newInstance("Bienvenido al juego " + jugador1.getNombre());
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.contenidoDinamico, fragmentDinamico);
-        ft.commit();
+            WellcomeFragment fragmentDinamico = WellcomeFragment.newInstance("Bienvenido al juego " + jugador1.getNombre());
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.replace(R.id.contenidoDinamico, fragmentDinamico);
+            ft.commit();
     }
 
     //Métodos abstractos de la interfaz ComunicadorFragmentEstatic perteneciente al fragment estático
     //MenuFragment
     @Override
     public void carregarPerfil() {
-        //Desde esta actividad le pasamos un parámetro de tipo String al fragmento dinámico
-        //WellcomeFragment, mediante su método newInstance(). Esto es así, porque el
-        //constructor de una fragmento no admite parámetros.
-       /*
-        WellcomeFragment fragmentDinamico = WellcomeFragment.newInstance("Bienvenido a Perfil");
-
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.contenidoDinamico, fragmentDinamico);
-        ft.commit();
-        */
         PerfilFragment fragmentPerfil = new PerfilFragment();
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.contenidoDinamico, fragmentPerfil);
         ft.commit();
-
     }
 
     @Override
     public void iniciarJoc() {
-        JuegoFragment fragmentJuego = JuegoFragment.newInstance(jugador1.getNick(),jugador1.getNombre());
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.contenidoDinamico, fragmentJuego);
-        ft.commit();
+            JuegoFragment fragmentJuego = JuegoFragment.newInstance(jugador1.getNick(),jugador1.getNombre());
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.replace(R.id.contenidoDinamico, fragmentJuego);
+            ft.commit();
     }
     @Override
     public void voreInstruccions(){
