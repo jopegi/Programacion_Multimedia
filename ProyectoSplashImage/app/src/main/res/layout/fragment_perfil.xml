@@ -50,12 +50,28 @@
             android:layout_height="10dp" />
 
         <EditText
+            android:id="@+id/editTextApellidos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Apellidos"
+            android:inputType="textPersonName" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <EditText
             android:id="@+id/editTextNick"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Nick"
             android:inputType="textPersonName" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
     </LinearLayout>
 
     <LinearLayout
@@ -64,14 +80,20 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/LinearLayout2"
         android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/btnGuardar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="Guardar" />
+            android:text="Modificar" />
+        <Button
+            android:id="@+id/btnOk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="Ok" />
     </LinearLayout>
 
 </RelativeLayout>

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,15 +13,34 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+
 
 public class PerfilFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_USERID = "userId";
     private static final String ARG_PARAM2 = "param2";
 
-    private EditText cajaNick, cajaNombre;
-    private Button botonGuardar;
+    private EditText cajaNick, cajaNombre, cajaApellidos;
+    private Button botonGuardar, botonOk;
+
+    private ArrayList<String> listadoNicks;
+
+    //Objeto que hará referencia a la BBDD FireBase
+    DatabaseReference referenciaBaseDatos,referenciaBaseDatos2;
+
+    private Usuario usu;
+    private String nickUsuario;
+    private String userId;
+
+    private boolean esInsercio = false;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -33,11 +53,10 @@ public class PerfilFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static PerfilFragment newInstance(String param1, String param2) {
+    public static PerfilFragment newInstance(String userId) {
         PerfilFragment fragment = new PerfilFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString(ARG_USERID, userId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -46,8 +65,7 @@ public class PerfilFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            userId = getArguments().getString(ARG_USERID);
         }
     }
 
@@ -60,7 +78,75 @@ public class PerfilFragment extends Fragment {
         //Instanciamos los elementos definidos en el layout del fragment
         cajaNick = (EditText) v.findViewById(R.id.editTextNick);
         cajaNombre = (EditText) v.findViewById(R.id.editTextNombre);
+        cajaApellidos = (EditText) v.findViewById(R.id.editTextApellidos);
         botonGuardar = (Button) v.findViewById(R.id.btnGuardar);
+        botonOk = (Button) v.findViewById(R.id.btnOk);
+
+        referenciaBaseDatos = FirebaseDatabase.getInstance().getReference("usuarios");
+
+        //****************ESCUCHARÁ CUALQUIER CAMBIO EN EL NODO usuarios DE LA BBDD***********
+        referenciaBaseDatos.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                listadoNicks = new ArrayList<String>();
+
+                for (DataSnapshot i: dataSnapshot.getChildren()){
+
+                    usu = i.getValue(Usuario.class);
+                    nickUsuario = usu.getNick();
+                    listadoNicks.add(nickUsuario);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        System.out.println("Buscant usuari");
+        Log.d("Josevi","Buscant usuari");
+        referenciaBaseDatos2 = FirebaseDatabase.getInstance().getReference("usuarios");
+
+        referenciaBaseDatos2.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                String nick = null;
+                String nom = null,cognom = null;
+
+                for (DataSnapshot i: dataSnapshot.getChildren()){
+                    System.out.println("Usuari trobat");
+                    Log.d("Josevi","Usuari trobat");
+                    usu = i.getValue(Usuario.class);
+                    if(usu.getUid_key().compareTo(userId) == 0){
+                        nick = usu.getNick();
+                        nom = usu.getNombre();
+                        cognom = usu.getApellidos();
+                    }
+
+                }
+
+                if(nick == null && nom == null && cognom == null){
+                    esInsercio = true;
+                    System.out.println("Inserció");
+                    Log.d("Josevi","Inserció");
+                }else{
+                    Log.d("Josevi","Actualit.");
+                    System.out.println("Actualit");
+                    esInsercio = false;
+                    cajaNombre.setText(nom);
+                    cajaApellidos.setText(cognom);
+                    cajaNick.setText(nick);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
 
         //Evento del botón guardar de la interfaz
@@ -68,21 +154,33 @@ public class PerfilFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                //Si las caja de texto no están vacias...
-                if(!cajaNick.getText().toString().isEmpty() && !cajaNombre.getText().toString().isEmpty()){
+                    if(!cajaNick.getText().toString().isEmpty() && !cajaNombre.getText().toString().isEmpty() && !cajaApellidos.getText().toString().isEmpty()){
+                        Usuario u1 = new Usuario(userId, cajaNick.getText().toString(), cajaNombre.getText().toString(), cajaApellidos.getText().toString());
+                        if(!existeNick(u1.getNick())){
+                            referenciaBaseDatos.child(userId).setValue(u1);
+                            Toast.makeText(getContext(), "Usuario insertado!", Toast.LENGTH_SHORT).show();
+                            mListener.mostrarWellcomeFragment();
+                        }else{
+                            Toast.makeText(getContext(), "El nick ya existe. Por favor, elija otro nick!", Toast.LENGTH_SHORT).show();
+                        }
 
-                    //Instanciamos un objeto de la clase Jugador y lo rellenamos con los datos insertados
-                    //por el usuario
-                    Jugador j1 = new Jugador(cajaNick.getText().toString(), cajaNombre.getText().toString());
-                    //Llamamos a la interfaz de comunicación ComunicadorFragmentPerfil definida como una interfaz
-                    //interna dentro de este fragment. Con esto indicamos que cuando se pulse el botón de guardar
-                    //se vaya a la actividad MenuActivity y se ejecute el método abstracto recollirDadesPerfil allí
-                    //sobreescrito pasándole el objeto jugador instanciado dentro del evento de este botón.
-                    mListener.recollirDadesPerfil(j1);
+                    }else{
 
-                    Toast.makeText(getActivity(), "Datos guardados...", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Debe de rellenar los campos nombre y nick!", Toast.LENGTH_SHORT).show();
+                    }
+            }
 
-                //Si las caja de texto están vacias...
+        });
+
+        //Evento del botón guardar de la interfaz
+        botonOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(!cajaNick.getText().toString().isEmpty() && !cajaNombre.getText().toString().isEmpty() && !cajaApellidos.getText().toString().isEmpty()){
+                    Usuario u1 = new Usuario(userId, cajaNick.getText().toString(), cajaNombre.getText().toString(), cajaApellidos.getText().toString());
+                    referenciaBaseDatos.child(userId).setValue(u1);
+                    mListener.mostrarWellcomeFragment();
                 }else{
 
                     Toast.makeText(getActivity(), "Debe de rellenar los campos nombre y nick!", Toast.LENGTH_SHORT).show();
@@ -94,7 +192,6 @@ public class PerfilFragment extends Fragment {
 
         return v;
     }
-
 
     @Override
     public void onAttach(Context context) {
@@ -126,5 +223,28 @@ public class PerfilFragment extends Fragment {
     public interface ComunicadorFragmentPerfil {
 
         void recollirDadesPerfil(Jugador jugador);
+        void mostrarWellcomeFragment();
+    }
+
+
+    //Método para comparar el nuevo nick con los ya existentes en FireBase
+    public boolean existeNick (String nuevoNick){
+
+        //Al nuevo nick le eliminamos los posibles espacios en blanco
+        String nickTrim = nuevoNick.trim();
+
+        boolean rtn = false;
+
+        //Vamos recorriendo el listado de nicks existentes y comparándolos con
+        //el nuevo nick que se pretende crear
+        for (int j = 0; j<listadoNicks.size(); j++){
+
+            //Se comparan las cadenas de texto ignorando las mayúsculas y minúsculas
+            if(listadoNicks.get(j).equalsIgnoreCase(nickTrim)){
+                rtn = true;
+
+            }
+        }
+        return rtn;
     }
 }

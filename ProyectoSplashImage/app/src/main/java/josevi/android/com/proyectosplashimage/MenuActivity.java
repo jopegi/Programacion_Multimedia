@@ -54,6 +54,11 @@ public class MenuActivity extends AppCompatActivity implements WellcomeFragment.
             ft.commit();
     }
 
+    @Override
+    public void mostrarWellcomeFragment() {
+
+    }
+
     //Métodos abstractos de la interfaz ComunicadorFragmentEstatic perteneciente al fragment estático
     //MenuFragment
     @Override
@@ -67,7 +72,7 @@ public class MenuActivity extends AppCompatActivity implements WellcomeFragment.
 
     @Override
     public void iniciarJoc() {
-            JuegoFragment fragmentJuego = JuegoFragment.newInstance(jugador1.getNick(),jugador1.getNombre());
+            JuegoFragment fragmentJuego = JuegoFragment.newInstance("");
             FragmentManager fm = getSupportFragmentManager();
             FragmentTransaction ft = fm.beginTransaction();
             ft.replace(R.id.contenidoDinamico, fragmentJuego);

@@ -26,7 +26,8 @@
         <activity
             android:name=".NDrawerActivity"
             android:label="@string/title_activity_ndrawer"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".RegistroActivity" />
     </application>
 
 </manifest>

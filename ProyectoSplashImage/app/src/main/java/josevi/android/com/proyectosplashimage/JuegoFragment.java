@@ -16,26 +16,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 import java.util.Random;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link JuegoFragment.ComunicadorFragmentJuego} interface
- * to handle interaction events.
- * Use the {@link JuegoFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class JuegoFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_NICK_USU = "nick";
-    private static final String ARG_NOMBRE_USU = "nombre";
 
-    // TODO: Rename and change types of parameters
+    private static final String ARG_ID_USU = "userId";
+
     private String mParam1;
-    private String mParam2;
 
     private TextView labelNick, labelNombre;
 
@@ -56,16 +51,22 @@ public class JuegoFragment extends Fragment {
 
     private ComunicadorFragmentJuego mListener;
 
+    //Objeto que hará referencia a la BBDD FireBase
+    DatabaseReference referenciaBaseDatos;
+
+    private Usuario usu;
+    private String nombre;
+    private String nick;
+
     public JuegoFragment() {
         // Required empty public constructor
     }
 
 
-    public static JuegoFragment newInstance(String nick, String nombre) {
+    public static JuegoFragment newInstance(String userId) {
         JuegoFragment fragment = new JuegoFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_NICK_USU, nick);
-        args.putString(ARG_NOMBRE_USU, nombre);
+        args.putString(ARG_ID_USU, userId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -74,8 +75,7 @@ public class JuegoFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_NICK_USU);
-            mParam2 = getArguments().getString(ARG_NOMBRE_USU);
+            mParam1 = getArguments().getString(ARG_ID_USU);
         }
     }
 
@@ -85,12 +85,38 @@ public class JuegoFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_juego, container, false);
         labelNick = (TextView) v.findViewById(R.id.textViewNick);
-        labelNick.setText(mParam1);
+
         labelNombre = (TextView) v.findViewById(R.id.textViewPuntos);
-        labelNombre.setText(mParam2);
+
         imagenDado = (ImageView) v.findViewById(R.id.imageViewDado);
         botonLanzar = (Button) v.findViewById(R.id.btnLanzar);
         botonStop = (Button) v.findViewById(R.id.btnStop);
+
+        referenciaBaseDatos = FirebaseDatabase.getInstance().getReference("usuarios");
+        Query q = referenciaBaseDatos.orderByChild("uid_key").equalTo(mParam1);
+
+        //****************ESCUCHARÁ CUALQUIER CAMBIO EN EL NODO usuarios DE LA BBDD***********
+        q.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot i: dataSnapshot.getChildren()){
+
+                    usu = i.getValue(Usuario.class);
+                    nombre = usu.getNombre();
+                    nick = usu.getNick();
+                }
+                labelNick.setText(nick);
+                labelNombre.setText(nombre);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
 
         AudioAttributes audioAttributes = new AudioAttributes.Builder()
                 .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
@@ -104,7 +130,7 @@ public class JuegoFragment extends Fragment {
 
         soundTrain = sp.load(getContext(), R.raw.train_sound, 1);
 
-        flujodemusica= sp.load(getContext(),R.raw.train_sound,1);
+        //flujodemusica= sp.load(getContext(),R.raw.train_sound,1);
 
         botonLanzar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,7 +138,7 @@ public class JuegoFragment extends Fragment {
 
                 if(mp != null || soundPoolPlay != 0){
                     mp.stop();
-                    //sp.stop(soundTrain);
+                    sp.stop(soundTrain);
 
                     tiradaDado = new Random().nextInt(max - min + 1) + min;
 

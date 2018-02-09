@@ -10,35 +10,45 @@ import android.os.Parcelable;
 public class Jugador implements Parcelable {
 
     //Atributos de la clase
+    private String uid_key;
     private String nick = "No nick";    //Indicamos un nick por defecto
     private String nombre = "No name";  //Indicamos un nombre por defecto
-    private int puntos;
+    private String apellidos;
+    private String email;
 
-    //Constructor 1
-    public Jugador() {
+    public Jugador(){
 
     }
 
-    //Constructor 2
-    public Jugador(String nombre){
-
-        this.nombre = nombre;
-    }
-
-    //Constructor 3
-    public Jugador(String nick, String nombre){
-
+    public Jugador(String nick, String nombre, String apellidos) {
         this.nick = nick;
         this.nombre = nombre;
+        this.apellidos = apellidos;
     }
 
-    //Métodos setter y getter
-    public String getNombre() {
-        return nombre;
-    }
 
-    public void setNombre(String nombre) {
+    public Jugador(String uid_key, String nick, String nombre, String apellidos, String email) {
+        this.uid_key = uid_key;
+        this.nick = nick;
         this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.email = email;
+    }
+
+    protected Jugador(Parcel in) {
+        uid_key = in.readString();
+        nick = in.readString();
+        nombre = in.readString();
+        apellidos = in.readString();
+        email = in.readString();
+    }
+
+    public String getUid_key() {
+        return uid_key;
+    }
+
+    public void setUid_key(String uid_key) {
+        this.uid_key = uid_key;
     }
 
     public String getNick() {
@@ -49,28 +59,28 @@ public class Jugador implements Parcelable {
         this.nick = nick;
     }
 
-    public int getPuntos() {
-        return puntos;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setPuntos(int puntos) {
-        this.puntos = puntos;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    //Método toString()
-    @Override
-    public String toString() {
-        return "Jugador{" +
-                "nombre='" + nombre + '\'' +
-                ", nick='" + nick + '\'' +
-                ", puntos=" + puntos +
-                '}';
+    public String getApellidos() {
+        return apellidos;
     }
 
-    protected Jugador(Parcel in) {
-        nick = in.readString();
-        nombre = in.readString();
-        puntos = in.readInt();
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
@@ -80,9 +90,11 @@ public class Jugador implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(uid_key);
         dest.writeString(nick);
         dest.writeString(nombre);
-        dest.writeInt(puntos);
+        dest.writeString(apellidos);
+        dest.writeString(email);
     }
 
     @SuppressWarnings("unused")
