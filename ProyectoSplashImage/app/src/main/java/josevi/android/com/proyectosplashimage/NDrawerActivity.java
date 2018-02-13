@@ -101,7 +101,7 @@ public class NDrawerActivity extends AppCompatActivity
         //misma, en el FrameLayout cuyo id se denomina contenidoDinamico. Podíamos haber instaciado
         //el Fragment directamente mediante su constructor, pero lo hemos hecho mediante el método
         //newInstance(param1) para poder pasarle un texto que se muestre al inicio de la Actividad.
-        WellcomeFragment fragmentDinamico = WellcomeFragment.newInstance ("Bienvenido a la app!!");
+        WellcomeFragment fragmentDinamico = WellcomeFragment.newInstance ("Bienvenido a la app!!"+nombreUser);
         //Toast.makeText(this, ""+fragmentDinamico.getArguments().getString("titol"), Toast.LENGTH_SHORT).show();
         //Creamos un manajador de Fragments
         FragmentManager fm = getSupportFragmentManager();
@@ -152,9 +152,19 @@ public class NDrawerActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_camera) { //acceso a la cámara
+
+            AlertDialog.Builder ventanaCamara = new AlertDialog.Builder(this);
+            ventanaCamara.setMessage("Aquí se implementará el funcionamiento de la cámara.");
+            ventanaCamara.setTitle("Cámara");
+            ventanaCamara.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Toast.makeText(NDrawerActivity.this, "Gracias por acceder a la cámara!", Toast.LENGTH_SHORT).show();
+                }
+            });
+            ventanaCamara.show();
+        } else if (id == R.id.nav_gallery) { //Información sobre la app
 
             /*
             Toast.makeText(this, "Aplicación MathDice para el entretenimiento " +
@@ -166,21 +176,47 @@ public class NDrawerActivity extends AppCompatActivity
             AlertDialog.Builder ventanaInfo = new AlertDialog.Builder(this);
             ventanaInfo.setMessage("Aplicación MathDice para el entretenimiento " +
                     "desarrollada por Josevi Pérez al final del curso de DAM " +
-                    "en el año 2018 para el módulo de Programación Multimedia ");
+                    "en el año 2018 para el módulo de Programación Multimedia.");
             ventanaInfo.setTitle("Información");
             ventanaInfo.setPositiveButton("ok", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    //Toast.makeText(NDrawerActivity.this, "Gracias por leer la info!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NDrawerActivity.this, "Gracias por leer la info!", Toast.LENGTH_SHORT).show();
                 }
             });
 
             ventanaInfo.show();
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_slideshow) { //Modificar datos de usuario
+
+            AlertDialog.Builder ventanaModificarUsuario = new AlertDialog.Builder(this);
+            ventanaModificarUsuario.setMessage("Aquí se implementará la lógica para" +
+                    " acceder a Firebase y modificar los datos de usuarios existentes.");
+            ventanaModificarUsuario.setTitle("Modificar datos de usuario");
+            ventanaModificarUsuario.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Toast.makeText(NDrawerActivity.this, "Gracias por acceder!", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            ventanaModificarUsuario.show();
 
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.nav_manage) { //Acceso al juego
+
+            AlertDialog.Builder ventanaJuego = new AlertDialog.Builder(this);
+            ventanaJuego.setMessage("Aquí se implementará la lógica para" +
+                    " acceder al juego.");
+            ventanaJuego.setTitle("Juego");
+            ventanaJuego.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Toast.makeText(NDrawerActivity.this, "Gracias por jugar!", Toast.LENGTH_SHORT).show();
+                }
+            });
+
+            ventanaJuego.show();
 
         }/*else if (id == R.id.nav_share) {
 
